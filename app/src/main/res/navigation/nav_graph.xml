@@ -44,5 +44,18 @@
         android:id="@+id/paintScreen"
         android:name="com.example.sketchapk.PaintScreen"
         android:label="fragment_paint_screen"
-        tools:layout="@layout/fragment_paint_screen" />
+        tools:layout="@layout/fragment_paint_screen" >
+        <action
+            android:id="@+id/toEnd"
+            app:destination="@id/endScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/endScreen"
+        android:name="com.example.sketchapk.endScreen"
+        android:label="fragment_end_screen"
+        tools:layout="@layout/fragment_end_screen" >
+        <action
+            android:id="@+id/playAgain"
+            app:destination="@id/difficulty" />
+    </fragment>
 </navigation>

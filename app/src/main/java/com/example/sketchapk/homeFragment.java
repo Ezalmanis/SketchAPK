@@ -2,6 +2,7 @@ package com.example.sketchapk;
 
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +33,12 @@ public class homeFragment extends Fragment {
 
 
 
-       /* button.setOnClickListener(new View.OnClickListener() {
+        button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(
-                        R.id.homeToAbout);
+                System.exit(0);
             }
-        });*/
+        });
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.homeToAbout, null));
         button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToDifficulty));

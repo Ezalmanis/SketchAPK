@@ -27,6 +27,10 @@ public class homeFragment extends Fragment {
         //mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
         Button button1 = getView().findViewById(R.id.button1);
+        Button button2 = getView().findViewById(R.id.button2);
+        Button button3 = getView().findViewById(R.id.button3);
+
+
 
        /* button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +41,8 @@ public class homeFragment extends Fragment {
         });*/
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.homeToAbout, null));
+        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToDifficulty));
+
     }
 
 

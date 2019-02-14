@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.net.Uri;
 
 
-public class MainActivity extends AppCompatActivity implements AbootUs.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements AbootUs.OnFragmentInteractionListener, difficulty.OnFragmentInteractionListener, amount.OnFragmentInteractionListener, PaintScreen.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

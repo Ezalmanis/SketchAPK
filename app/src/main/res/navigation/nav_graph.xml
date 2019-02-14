@@ -13,10 +13,36 @@
         <action
             android:id="@+id/homeToAbout"
             app:destination="@id/abootUs" />
+        <action
+            android:id="@+id/homeToDifficulty"
+            app:destination="@id/difficulty" />
     </fragment>
     <fragment
         android:id="@+id/abootUs"
         android:name="com.example.sketchapk.AbootUs"
         android:label="fragment_aboot_us"
         tools:layout="@layout/fragment_aboot_us" />
+    <fragment
+        android:id="@+id/difficulty"
+        android:name="com.example.sketchapk.difficulty"
+        android:label="fragment_difficulty"
+        tools:layout="@layout/fragment_difficulty" >
+        <action
+            android:id="@+id/diffToAmount"
+            app:destination="@id/amount" />
+    </fragment>
+    <fragment
+        android:id="@+id/amount"
+        android:name="com.example.sketchapk.amount"
+        android:label="fragment_amount"
+        tools:layout="@layout/fragment_amount" >
+        <action
+            android:id="@+id/amountToPaint"
+            app:destination="@id/paintScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/paintScreen"
+        android:name="com.example.sketchapk.PaintScreen"
+        android:label="fragment_paint_screen"
+        tools:layout="@layout/fragment_paint_screen" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.sketchapk;
+package com.example.fragments;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.sketchapk", appContext.getPackageName());
+        assertEquals("com.example.fragments", appContext.getPackageName());
     }
 }

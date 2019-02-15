@@ -1,4 +1,4 @@
-package com.example.sketchapk;
+package com.example.fragments;
 
 import org.junit.Test;
 

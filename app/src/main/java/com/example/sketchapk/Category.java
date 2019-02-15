@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.navigation.Navigation;
 
@@ -114,9 +115,11 @@ public class Category extends Fragment {
 
         Button button1 = getView().findViewById(R.id.buttonConfirm);
 
+        Bundle b = getArguments();
+        String amount = b.getString("amountStr");
+        TextView confirmationText = getView().findViewById(R.id.confirmationText);
+        confirmationText.setText(amount);
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.catToPaint, null));
-
-
     }
 }

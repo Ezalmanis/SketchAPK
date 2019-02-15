@@ -15,12 +15,12 @@ import androidx.navigation.Navigation;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link amount.OnFragmentInteractionListener} interface
+ * {@link Category.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link amount#newInstance} factory method to
+ * Use the {@link Category#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class amount extends Fragment {
+public class Category extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +32,7 @@ public class amount extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public amount() {
+    public Category() {
         // Required empty public constructor
     }
 
@@ -42,11 +42,11 @@ public class amount extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment amount.
+     * @return A new instance of fragment Category.
      */
     // TODO: Rename and change types and number of parameters
-    public static amount newInstance(String param1, String param2) {
-        amount fragment = new amount();
+    public static Category newInstance(String param1, String param2) {
+        Category fragment = new Category();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +67,7 @@ public class amount extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_amount, container, false);
+        return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -112,16 +112,11 @@ public class amount extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button button1 = getView().findViewById(R.id.buttonOne);
-        Button button2 = getView().findViewById(R.id.buttonTwo);
-        Button button3 = getView().findViewById(R.id.buttonThree);
-
+        Button button1 = getView().findViewById(R.id.buttonConfirm);
 
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.amountToCat, null));
-        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat));
-        button3.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat));
+                R.id.catToPaint, null));
+
 
     }
-
 }

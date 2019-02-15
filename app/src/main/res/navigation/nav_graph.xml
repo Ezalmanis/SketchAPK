@@ -37,8 +37,8 @@
         android:label="fragment_amount"
         tools:layout="@layout/fragment_amount" >
         <action
-            android:id="@+id/amountToPaint"
-            app:destination="@id/paintScreen" />
+            android:id="@+id/amountToCat"
+            app:destination="@id/category" />
     </fragment>
     <fragment
         android:id="@+id/paintScreen"
@@ -57,5 +57,14 @@
         <action
             android:id="@+id/playAgain"
             app:destination="@id/difficulty" />
+    </fragment>
+    <fragment
+        android:id="@+id/category"
+        android:name="com.example.sketchapk.Category"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/catToPaint"
+            app:destination="@id/paintScreen" />
     </fragment>
 </navigation>

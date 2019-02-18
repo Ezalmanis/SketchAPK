@@ -122,16 +122,15 @@ public class amount extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonTwo);
         Button button3 = getView().findViewById(R.id.buttonThree);
 
-        button1.setVisibility(View.GONE);
-        button2.setVisibility(View.GONE);
-        button3.setVisibility(View.GONE);
+        //button1.setVisibility(View.GONE);
+        //button2.setVisibility(View.GONE);
+        //button3.setVisibility(View.GONE);
 
 
         //button1.setOnClickListener(Navigation.createNavigateOnClickListener(
         //        R.id.amountToPaint, null));
         //button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToPaint));
         //button3.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToPaint));
-
 
         Button amountConfirmButton = getView().findViewById(R.id.amountConfirmButton);
         //EditText userInput = getView().findViewById(R.id.textInputEditText);
@@ -196,10 +195,6 @@ public class amount extends Fragment {
                 // Navigation.createNavigateOnClickListener(R.id.amountToCat, b);
             }
         });*/
-
-
-
-
 
     }
 

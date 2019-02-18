@@ -20,7 +20,6 @@ public class homeFragment extends Fragment {
     public homeFragment() {
         // Required empty public constructor
 
-
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -31,17 +30,15 @@ public class homeFragment extends Fragment {
         Button button2 = getView().findViewById(R.id.button2);
         Button button3 = getView().findViewById(R.id.button3);
 
-
-
+        button1.setOnClickListener(Navigation.createNavigateOnClickListener(
+                R.id.homeToAbout, null));
+        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToDifficulty));
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.exit(0);
             }
         });
-        button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.homeToAbout, null));
-        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToDifficulty));
 
     }
 
@@ -51,9 +48,6 @@ public class homeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
-
-
-
     }
 
 

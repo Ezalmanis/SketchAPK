@@ -5,10 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+
+import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 
 
@@ -31,6 +34,7 @@ public class difficulty extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    Bundle b = new Bundle();
 
     public difficulty() {
         // Required empty public constructor
@@ -117,10 +121,56 @@ public class difficulty extends Fragment {
         Button button3 = getView().findViewById(R.id.buttonHard);
 
 
-        button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.diffToAmount, null));
-        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount));
-        button3.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount));
+        boolean lol = false;
+
+
+        button1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                    b.putInt("Timer", 60);
+                    b.putString("StringDiff", "big gay android");
+                    b.putString("time", "60");
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
+                return true;
+            }
+        });
+
+        button2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
+                    b.putInt("Timer", 30);
+                    b.putString("StringDiff", "30");
+                    b.putString("time", "30");
+                    Navigation.createNavigateOnClickListener(R.id.diffToAmount,b);
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
+                return true;
+            }
+        });
+        button3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
+                    b.putInt("Timer", 15);
+                    b.putString("StringDiff", "15");
+                    b.putString("time", "15");
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
+                return true;
+            }
+        });
+
+
+
+       /* button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount,a));
+        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount,a));
+        button3.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount,a));*/
+
+
+
 
     }
 

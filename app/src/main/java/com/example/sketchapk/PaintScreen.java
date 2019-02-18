@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.navigation.Navigation;
 
 
@@ -109,6 +111,23 @@ public class PaintScreen extends Fragment {
     }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Bundle b2 = getArguments();
+        String time = b2.getString("time");
+        String cat1 = b2.getString("cat1");
+        String cat2 = b2.getString("cat2");
+        String cat3 = b2.getString("cat3");
+        Integer timer = Integer.parseInt(time);
+        TextView diffBund = getView().findViewById(R.id.timerTest);
+        diffBund.setText(cat1+cat2+cat3);
+        if (!(timer==null)) {
+
+            Long longTime =timer.longValue();
+            String halp =longTime.toString();
+
+        }
+
+
+
 
         Button button1 = getView().findViewById(R.id.buttonDone);
 

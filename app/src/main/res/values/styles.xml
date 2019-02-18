@@ -6,5 +6,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <color name="textView">#32CD32</color>
 
 </resources>

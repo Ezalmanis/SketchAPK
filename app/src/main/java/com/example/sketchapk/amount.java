@@ -121,8 +121,8 @@ public class amount extends Fragment {
         Bundle b = getArguments();
         final Bundle b1 = b;
         String strDiff = b.getString("StringDiff");
-        TextView diffBund = getView().findViewById(R.id.diffBund);
-        diffBund.setText(strDiff);
+        //TextView diffBund = getView().findViewById(R.id.diffBund);
+        //diffBund.setText(strDiff);
         Button button1 = getView().findViewById(R.id.buttonOne);
         Button button2 = getView().findViewById(R.id.buttonTwo);
         Button button3 = getView().findViewById(R.id.buttonThree);

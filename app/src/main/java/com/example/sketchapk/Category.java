@@ -10,7 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+
 
 import androidx.navigation.Navigation;
 
@@ -23,7 +28,7 @@ import androidx.navigation.Navigation;
  * Use the {@link Category#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Category extends Fragment {
+public class Category extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,6 +102,8 @@ public class Category extends Fragment {
         mListener = null;
     }
 
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -112,12 +119,14 @@ public class Category extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState)  {
         super.onActivityCreated(savedInstanceState);
+
 
         Button button1 = getView().findViewById(R.id.buttonConfirm);
         Bundle b1 = getArguments();
         Bundle b2 = b1;
+
         //String amount = b1.getString("amountStr");
         //Integer bundleCnt = b1.getInt("amountInt");
         //String strDiff = b1.getString("StringDiff");
@@ -129,13 +138,23 @@ public class Category extends Fragment {
                 R.id.catToPaint, b2));
         // Dropdown menus:
         Spinner spinner1 = getView().findViewById(R.id.spinner1);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource
                 (getContext(), R.array.category_array1, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         spinner1.setAdapter(adapter1);
+        //spinner1.setOnItemSelectedListener(new Category());
+        spinner1.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+        });
+
 
         Spinner spinner2 = getView().findViewById(R.id.spinner2);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -154,5 +173,7 @@ public class Category extends Fragment {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner3.setAdapter(adapter3);
+
+
     }
 }

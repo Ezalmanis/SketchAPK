@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.support.design.widget.TextInputEditText;
+import android.widget.TextView;
 
 import androidx.navigation.Navigation;
 
@@ -117,7 +118,11 @@ public class amount extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Bundle b = getArguments();
+        final Bundle b1 = b;
+        String strDiff = b.getString("StringDiff");
+        TextView diffBund = getView().findViewById(R.id.diffBund);
+        diffBund.setText(strDiff);
         Button button1 = getView().findViewById(R.id.buttonOne);
         Button button2 = getView().findViewById(R.id.buttonTwo);
         Button button3 = getView().findViewById(R.id.buttonThree);
@@ -144,7 +149,7 @@ public class amount extends Fragment {
         //Navigation.createNavigateOnClickListener(R.id.amountToCat, b)
         //amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b));
 
-        final Bundle b = new Bundle();
+
 
         TextInputEditText e = getView().findViewById(R.id.textInputEditText);
 
@@ -157,14 +162,14 @@ public class amount extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 EditText userInput = getView().findViewById(R.id.textInputEditText);
                 String amountStr = userInput.getText().toString();
-                b.putString("amountStr", amountStr);
+                b1.putString("amountStr", amountStr);
                 int amountInt = 1;
-                b.putInt("amountInt", amountInt);
+                b1.putInt("amountInt", amountInt);
             }
         });
 
 
-        amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b));
+        amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b1));
 
 
     /*    amountConfirmButton.setOnClickListener(new View.OnClickListener() {

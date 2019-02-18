@@ -116,13 +116,17 @@ public class Category extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         Button button1 = getView().findViewById(R.id.buttonConfirm);
-
-        Bundle b = getArguments();
-        String amount = b.getString("amountStr");
-        TextView confirmationText = getView().findViewById(R.id.confirmationText);
-        confirmationText.setText(amount);
+        Bundle b1 = getArguments();
+        Bundle b2 = b1;
+        //String amount = b1.getString("amountStr");
+        //Integer bundleCnt = b1.getInt("amountInt");
+        //String strDiff = b1.getString("StringDiff");
+        //TextView diffBund = getView().findViewById(R.id.amountToHere);
+        //diffBund.setText(strDiff);
+        //TextView confirmationText = getView().findViewById(R.id.confirmationText);
+        //confirmationText.setText(amount);
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.catToPaint, null));
+                R.id.catToPaint, b2));
         // Dropdown menus:
         Spinner spinner1 = getView().findViewById(R.id.spinner1);
         // Create an ArrayAdapter using the string array and a default spinner layout

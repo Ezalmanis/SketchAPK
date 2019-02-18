@@ -109,7 +109,8 @@ public class PaintScreen extends Fragment {
     }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        Bundle b2 = getArguments();
+        Integer timer = b2.getInt("Timer");
         Button button1 = getView().findViewById(R.id.buttonDone);
 
 

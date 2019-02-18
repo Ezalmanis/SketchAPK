@@ -148,8 +148,6 @@ public class amount extends Fragment {
         //Navigation.createNavigateOnClickListener(R.id.amountToCat, b)
         //amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b));
 
-
-
         TextInputEditText e = getView().findViewById(R.id.textInputEditText);
 
         e.addTextChangedListener(new TextWatcher() {

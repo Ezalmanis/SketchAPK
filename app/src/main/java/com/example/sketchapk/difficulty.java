@@ -1,5 +1,4 @@
 package com.example.sketchapk;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -22,41 +21,16 @@ import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link difficulty.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link difficulty#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class difficulty extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
     Bundle b = new Bundle();
 
-    public difficulty() {
-        // Required empty public constructor
-    }
+    public difficulty() { }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment difficulty.
-     */
-    // TODO: Rename and change types and number of parameters
     public static difficulty newInstance(String param1, String param2) {
         difficulty fragment = new difficulty();
         Bundle args = new Bundle();
@@ -76,13 +50,10 @@ public class difficulty extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_difficulty, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -106,37 +77,22 @@ public class difficulty extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    private void goToNext()
-    {
-        NavHostFragment.findNavController(this).navigate(R.id.diffToAmount,b);
 
+    private void goToNext() {
+        NavHostFragment.findNavController(this).navigate(R.id.diffToAmount,b);
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
         super.onActivityCreated(savedInstanceState);
-
         Button button1 = getView().findViewById(R.id.buttonEasy);
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
         Button custom = getView().findViewById(R.id.buttonCustom);
-
         boolean lol = false;
-
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -187,19 +143,6 @@ public class difficulty extends Fragment {
                 return true;
             }
         });
-
-
-
-       /* button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount,a));
-        button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount,a));
-        button3.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.diffToAmount,a));*/
-
-
-
-
     }
-
-
-
 }
 

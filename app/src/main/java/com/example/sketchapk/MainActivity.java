@@ -4,14 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.net.Uri;
 
-
 public class MainActivity extends AppCompatActivity implements endScreen.OnFragmentInteractionListener,
         AbootUs.OnFragmentInteractionListener,
         difficulty.OnFragmentInteractionListener,
         amount.OnFragmentInteractionListener,
         PaintScreen.OnFragmentInteractionListener,
-        Category.OnFragmentInteractionListener{
-
+        Category.OnFragmentInteractionListener {
     public static int amountInt = 0;
 
     @Override
@@ -21,8 +19,5 @@ public class MainActivity extends AppCompatActivity implements endScreen.OnFragm
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
+    public void onFragmentInteraction(Uri uri) { }
 }

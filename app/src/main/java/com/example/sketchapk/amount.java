@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -127,27 +128,43 @@ public class amount extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonTwo);
         Button button3 = getView().findViewById(R.id.buttonThree);
 
-        //button1.setVisibility(View.GONE);
-        //button2.setVisibility(View.GONE);
-        //button3.setVisibility(View.GONE);
+        button1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                b1.putInt("amountInt", 1);
+
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+                return true;
+            }
+        });
+        button2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                    b1.putInt("amountInt", 2);
+
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+                return true;
+            }
+        });
+        button3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                    b1.putInt("amountInt", 3);
+
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+                return true;
+            }
+        });
 
 
-        //button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-        //        R.id.amountToPaint, null));
-        //button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToPaint));
-        //button3.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToPaint));
 
         Button amountConfirmButton = getView().findViewById(R.id.amountConfirmButton);
-        //EditText userInput = getView().findViewById(R.id.textInputEditText);
-        //int amountSelected = Integer.parseInt(userInput.getText().toString());
-        //String amountStr = userInput.getText().toString();
-        //int amountInt = Integer.parseInt(amountStr);
-        //Bundle b = new Bundle();
-        //b.putInt("amount", 1);
-        //b.putString("amountTxt", "Hard coded string");
-        //Navigation.createNavigateOnClickListener(R.id.amountToCat, b)
-        //amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b));
-
         TextInputEditText e = getView().findViewById(R.id.textInputEditText);
 
         e.addTextChangedListener(new TextWatcher() {
@@ -169,35 +186,6 @@ public class amount extends Fragment {
         amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b1));
 
 
-    /*    amountConfirmButton.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-                EditText userInput = getView().findViewById(R.id.textInputEditText);
-
-                Bundle b = new Bundle();
-                String amountStr = userInput.getText().toString();
-                Log.d("CREATION", "amountStr = "+amountStr);
-               // if (amountStr != "") {
-                    b.putString("amountStr", amountStr);
-                    //int amountInt = Integer.parseInt(amountStr);
-                    int amountInt = 1;
-                    b.putInt("amountInt", amountInt);
-               // }
-                //else {
-                    //b.putString("amountTxt", "1");
-                    //b.putInt("amount", 1);
-                //}
-
-                Log.d("CREATION", "bundle str = "+b.get("amountStr"));
-                Log.d("CREATION", "bundle int = "+b.get("amountInt"));
-                //View.OnClickListener n = Navigation.createNavigateOnClickListener(R.id.homeToDifficulty);
-                //Navigation.createNavigateOnClickListener(R.id.homeToDifficulty);
-                Navigation.findNavController(view).navigate(R.id.homeToDifficulty, b);
-                // Navigation.createNavigateOnClickListener(R.id.amountToCat, b);
-            }
-        });*/
 
     }
 

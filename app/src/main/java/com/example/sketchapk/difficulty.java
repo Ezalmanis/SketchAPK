@@ -123,6 +123,7 @@ public class difficulty extends Fragment {
     private void goToNext()
     {
         NavHostFragment.findNavController(this).navigate(R.id.diffToAmount,b);
+
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -177,43 +178,18 @@ public class difficulty extends Fragment {
                 return true;
             }
         });
-
         custom.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View arg0, MotionEvent arg1)
-            {
-                arg0 =LayoutInflater.from(arg0.getContext()).inflate(R.layout.user_input,null);
-                final AlertDialog.Builder alertpop= new AlertDialog.Builder(arg0.getContext());
-                alertpop.setView(arg0);
-                final EditText userInput = arg0.findViewById(R.id.userinput);
-                Button set = arg0.findViewById(R.id.Set);
-                final Dialog dialog = alertpop.create();
-                dialog.show();
-
-                set.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View arg0, MotionEvent arg1)
-                    {
-                        int i =0;
-                        if (arg1.getAction()==MotionEvent.ACTION_DOWN)
-                            b.putInt("Timer", 15000);
-                        b.putString("StringDiff", "15");
-                        b.putString("time", "userInput");
-                        if ((arg1.getAction()==MotionEvent.ACTION_UP)&&(i==0))
-                            dialog.dismiss();
-                        i++;
-                        goToNext();
-
-
-                        return true;
-
-                    }
-                });
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
+                    b.putInt("Timer", 120000);
+                b.putString("StringDiff", "120");
+                b.putString("time", "120000");
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;
             }
         });
-
-
 
 
 

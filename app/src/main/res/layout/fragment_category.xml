@@ -42,6 +42,7 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/dropdown_bg"
         android:fontFamily="@font/font1"
+
         app:layout_constraintBottom_toTopOf="@+id/spinner2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"

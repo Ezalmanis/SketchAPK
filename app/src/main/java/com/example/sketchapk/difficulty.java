@@ -134,11 +134,8 @@ public class difficulty extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
         Button custom = getView().findViewById(R.id.buttonCustom);
-        TextView popup = getView().findViewById(R.id.popup);
-
 
         boolean lol = false;
-
 
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override

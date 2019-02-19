@@ -169,7 +169,6 @@ public class Category extends Fragment{
         }
         });
 
-
         Spinner spinner2 = getView().findViewById(R.id.spinner2);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource

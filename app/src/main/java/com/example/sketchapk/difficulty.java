@@ -120,9 +120,7 @@ public class difficulty extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
 
-
         boolean lol = false;
-
 
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override

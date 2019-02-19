@@ -1,10 +1,14 @@
 package com.example.sketchapk;
 
 import android.content.Context;
+import android.graphics.drawable.AdaptiveIconDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 
 /**
@@ -28,9 +33,9 @@ public class PaintScreen extends Fragment {
 
     private TextView diffBund;
     private Button buttonStartPause;
+    private Button done;
     private CountDownTimer countDownTimer;
     private boolean timerRunning;
-
     private long timeLeftInMillis;
     private long endTime;
 
@@ -66,7 +71,6 @@ public class PaintScreen extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,15 +79,14 @@ public class PaintScreen extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_paint_screen, container, false);
 
         buttonStartPause = view.findViewById(R.id.button_start_pause);
-        buttonStartPause.setOnClickListener(new View.OnClickListener() {
+        done = view.findViewById(R.id.buttonDone);
+        /*buttonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (timerRunning) {
@@ -92,24 +95,10 @@ public class PaintScreen extends Fragment {
                     startTimer();
                 }
             }
-        });
-
-
-
-/*buttonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetTimer();
-            }
-        });*//*
-
-
-        updateCountDownText();
-        return view;*/
+        });*/
 
         return view;
     }
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -148,10 +137,9 @@ public class PaintScreen extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
         super.onActivityCreated(savedInstanceState);
-
-
         Bundle b2 = getArguments();
         diffBund = getView().findViewById(R.id.text_view_countdown);
         String time = b2.getString("time");
@@ -161,14 +149,16 @@ public class PaintScreen extends Fragment {
             String initial_Time = timer.toString();
             diffBund.setText(initial_Time);
             timeLeftInMillis = timer;
-            updateCountDownText();
+            if(timerRunning == false)
+            {
+                buttonStartPause.setVisibility(View.INVISIBLE);
+                startTimer();
+                updateCountDownText();
+            }
+
         }
         Button button1 = getView().findViewById(R.id.buttonDone);
-
-
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
-
-
     }
 
 
@@ -190,52 +180,41 @@ public class PaintScreen extends Fragment {
         }.start();
 
         timerRunning = true;
-        updateButtons();
+        //updateButtons();
     }
-    private void pauseTimer() {
+    /*private void pauseTimer() {
         countDownTimer.cancel();
         timerRunning = false;
         updateButtons();
-    }
-
-    /*private void resetTimer() {
-        timeLeftInMillis = timer ;
-        updateCountDownText();
-        updateButtons();
-    }
-*/
+    }*/
     private void updateCountDownText()
     {
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
-
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
         diffBund.setText(timeLeftFormatted);
-
     }
-
     private void updateButtons() {
         if (timerRunning) {
             // buttonReset.setVisibility(View.INVISIBLE);
-            buttonStartPause.setText("Pause");
+            //buttonStartPause.setText("Pause");
         } else {
-            buttonStartPause.setText("Start");
+            //buttonStartPause.setText("Start");
 
-            if (timeLeftInMillis < 1000) {
+            if (timeLeftInMillis < 1000)
+            {
                 buttonStartPause.setVisibility(View.INVISIBLE);
+                diffBund.setVisibility(View.INVISIBLE);
+                done.setVisibility(View.INVISIBLE);
+                NavHostFragment.findNavController(this).navigate(R.id.toEnd);
                 //diffBund.setText("Time's up");
-               // Navigation.findNavController().navigate(R.id.diffToAmount);
-            } else {
-                // buttonStartPause.setVisibility(View.VISIBLE);
+                /*  Navigation.findNavController(arg0).navigate(R.id.toEnd);*/
+                //endScreen  es = new endScreen();
+                // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.catToPaint, new endScreen()).commit();
             }
-
-           /* if (timeLeftInMillis < timer ) {
-                //buttonReset.setVisibility(View.VISIBLE);
-            } else {
-                //buttonReset.setVisibility(View.INVISIBLE);
-            }*/
         }
     }
+
+
 
 }

@@ -1,6 +1,9 @@
 package com.example.sketchapk;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +12,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+
+import java.util.Locale;
 
 import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 
 /**
@@ -112,23 +120,32 @@ public class difficulty extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    private void goToNext()
+    {
+        NavHostFragment.findNavController(this).navigate(R.id.diffToAmount,b);
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
 
         Button button1 = getView().findViewById(R.id.buttonEasy);
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
+        Button custom = getView().findViewById(R.id.buttonCustom);
+        TextView popup = getView().findViewById(R.id.popup);
+
 
         boolean lol = false;
+
 
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
-                    b.putInt("Timer", 60);
-                    b.putString("StringDiff", "60");
-                    b.putString("time", "60000");
+                    b.putInt("Timer", 60000);
+                //b.putString("StringDiff", "big gay android");
+                b.putString("time", "60000");
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;
@@ -139,10 +156,10 @@ public class difficulty extends Fragment {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction()==MotionEvent.ACTION_DOWN)
-                    b.putInt("Timer", 30);
-                    b.putString("StringDiff", "30");
-                    b.putString("time", "30000");
-                    Navigation.createNavigateOnClickListener(R.id.diffToAmount,b);
+                    b.putInt("Timer", 30000);
+                b.putString("StringDiff", "30");
+                b.putString("time", "30000");
+                Navigation.createNavigateOnClickListener(R.id.diffToAmount,b);
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;
@@ -152,14 +169,51 @@ public class difficulty extends Fragment {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction()==MotionEvent.ACTION_DOWN)
-                    b.putInt("Timer", 15);
-                    b.putString("StringDiff", "15");
-                    b.putString("time", "15000");
+                    b.putInt("Timer", 15000);
+                b.putString("StringDiff", "15");
+                b.putString("time", "15000");
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;
             }
         });
+
+        custom.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1)
+            {
+                arg0 =LayoutInflater.from(arg0.getContext()).inflate(R.layout.user_input,null);
+                final AlertDialog.Builder alertpop= new AlertDialog.Builder(arg0.getContext());
+                alertpop.setView(arg0);
+                final EditText userInput = arg0.findViewById(R.id.userinput);
+                Button set = arg0.findViewById(R.id.Set);
+                final Dialog dialog = alertpop.create();
+                dialog.show();
+
+                set.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View arg0, MotionEvent arg1)
+                    {
+                        int i =0;
+                        if (arg1.getAction()==MotionEvent.ACTION_DOWN)
+                            b.putInt("Timer", 15000);
+                        b.putString("StringDiff", "15");
+                        b.putString("time", "userInput");
+                        if ((arg1.getAction()==MotionEvent.ACTION_UP)&&(i==0))
+                            dialog.dismiss();
+                        i++;
+                        goToNext();
+
+
+                        return true;
+
+                    }
+                });
+                return true;
+            }
+        });
+
+
 
 
 
@@ -173,4 +227,6 @@ public class difficulty extends Fragment {
     }
 
 
+
 }
+

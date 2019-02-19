@@ -127,8 +127,8 @@ public class difficulty extends Fragment {
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
                     b.putInt("Timer", 60);
-                    b.putString("StringDiff", "big gay android");
-                    b.putString("time", "60");
+                    b.putString("StringDiff", "60");
+                    b.putString("time", "60000");
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;
@@ -141,7 +141,7 @@ public class difficulty extends Fragment {
                 if (arg1.getAction()==MotionEvent.ACTION_DOWN)
                     b.putInt("Timer", 30);
                     b.putString("StringDiff", "30");
-                    b.putString("time", "30");
+                    b.putString("time", "30000");
                     Navigation.createNavigateOnClickListener(R.id.diffToAmount,b);
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
@@ -154,7 +154,7 @@ public class difficulty extends Fragment {
                 if (arg1.getAction()==MotionEvent.ACTION_DOWN)
                     b.putInt("Timer", 15);
                     b.putString("StringDiff", "15");
-                    b.putString("time", "15");
+                    b.putString("time", "15000");
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;

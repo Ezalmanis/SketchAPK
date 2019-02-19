@@ -17,7 +17,6 @@ import androidx.navigation.Navigation;
  */
 public class homeFragment extends Fragment {
 
-
     public homeFragment() {
         // Required empty public constructor
 
@@ -26,6 +25,8 @@ public class homeFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+
+
 
         Button button1 = getView().findViewById(R.id.button1);
         Button button2 = getView().findViewById(R.id.button2);

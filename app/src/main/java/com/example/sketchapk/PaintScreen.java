@@ -3,12 +3,15 @@ package com.example.sketchapk;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 import androidx.navigation.Navigation;
 
@@ -22,6 +25,15 @@ import androidx.navigation.Navigation;
  * create an instance of this fragment.
  */
 public class PaintScreen extends Fragment {
+
+    private TextView diffBund;
+    private Button buttonStartPause;
+    private CountDownTimer countDownTimer;
+    private boolean timerRunning;
+
+    private long timeLeftInMillis;
+    private long endTime;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -68,7 +80,34 @@ public class PaintScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_paint_screen, container, false);
+        View view = inflater.inflate(R.layout.fragment_paint_screen, container, false);
+
+        buttonStartPause = view.findViewById(R.id.button_start_pause);
+        buttonStartPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (timerRunning) {
+                    pauseTimer();
+                } else {
+                    startTimer();
+                }
+            }
+        });
+
+
+
+/*buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTimer();
+            }
+        });*//*
+
+
+        updateCountDownText();
+        return view;*/
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -111,31 +150,92 @@ public class PaintScreen extends Fragment {
     }
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
         Bundle b2 = getArguments();
+        diffBund = getView().findViewById(R.id.text_view_countdown);
         String time = b2.getString("time");
-        String cat1 = b2.getString("cat1");
-        String cat2 = b2.getString("cat2");
-        String cat3 = b2.getString("cat3");
-        Integer timer = Integer.parseInt(time);
-        TextView diffBund = getView().findViewById(R.id.timerTest);
-        diffBund.setText(cat1+cat2+cat3);
-        if (!(timer==null)) {
-
-            Long longTime =timer.longValue();
-            String halp =longTime.toString();
-
+        Long timer = Long.parseLong(time);
+        if(timer != null)
+        {
+            String initial_Time = timer.toString();
+            diffBund.setText(initial_Time);
+            timeLeftInMillis = timer;
+            updateCountDownText();
         }
-
-
-
-
         Button button1 = getView().findViewById(R.id.buttonDone);
 
 
-        button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.toEnd, null));
+        button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
 
 
+    }
+
+
+    private void startTimer() {
+        endTime = System.currentTimeMillis() + timeLeftInMillis;
+
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                timerRunning = false;
+                updateButtons();
+            }
+        }.start();
+
+        timerRunning = true;
+        updateButtons();
+    }
+    private void pauseTimer() {
+        countDownTimer.cancel();
+        timerRunning = false;
+        updateButtons();
+    }
+
+    /*private void resetTimer() {
+        timeLeftInMillis = timer ;
+        updateCountDownText();
+        updateButtons();
+    }
+*/
+    private void updateCountDownText()
+    {
+        int minutes = (int) (timeLeftInMillis / 1000) / 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+
+        diffBund.setText(timeLeftFormatted);
+
+    }
+
+    private void updateButtons() {
+        if (timerRunning) {
+            // buttonReset.setVisibility(View.INVISIBLE);
+            buttonStartPause.setText("Pause");
+        } else {
+            buttonStartPause.setText("Start");
+
+            if (timeLeftInMillis < 1000) {
+                buttonStartPause.setVisibility(View.INVISIBLE);
+                //diffBund.setText("Time's up");
+               // Navigation.findNavController().navigate(R.id.diffToAmount);
+            } else {
+                // buttonStartPause.setVisibility(View.VISIBLE);
+            }
+
+           /* if (timeLeftInMillis < timer ) {
+                //buttonReset.setVisibility(View.VISIBLE);
+            } else {
+                //buttonReset.setVisibility(View.INVISIBLE);
+            }*/
+        }
     }
 
 }

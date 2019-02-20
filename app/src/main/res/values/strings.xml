@@ -2,36 +2,11 @@
     <string name="app_name">SketchAPK</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-        <string-array name="category_array1">
-            <item>WHAT</item>
-            <item>Venus</item>
-            <item>Earth</item>
-            <item>Mars</item>
-            <item>Jupiter</item>
-            <item>Saturn</item>
-            <item>Uranus</item>
-            <item>Neptune</item>
-        </string-array>
-
-    <string-array name="category_array2">
-        <item>IS</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
-
-    <string-array name="category_array3">
-        <item>THIS</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
+    <string name="about_us_text">This app was developed by Team4 [0-4]</string>
+    <string name="about_us_array">String Team4 [] = new String[];</string>
+    <string name="about_us_text0"> Team4[0] = Eriks Zalmanis;</string>
+    <string name="about_us_text1"> Team4[1] = Darina Kostecka;</string>
+    <string name="about_us_text2"> Team4[2] = Arturs Alsins;</string>
+    <string name="about_us_text3"> Team4[3] = Nabeel Munir;</string>
+    <string name="about_us_text4"> Team4[4] = Amiran Pirchalaishvili;</string>
 </resources>

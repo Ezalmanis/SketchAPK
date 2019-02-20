@@ -1,6 +1,7 @@
 package com.example.sketchapk;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -107,10 +108,6 @@ public class PaintScreen extends Fragment {
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis=millisUntilFinished;
                 updateCountDownText();
-
-
-
-
                 }
 
 
@@ -236,6 +233,12 @@ public class PaintScreen extends Fragment {
             button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
         }
 
-
     }
+    @Override public void onResume() {
+        super.onResume();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+    @Override public void onPause() {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        super.onPause(); }
 }

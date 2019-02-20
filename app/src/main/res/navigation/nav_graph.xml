@@ -65,6 +65,7 @@
         tools:layout="@layout/fragment_category" >
         <action
             android:id="@+id/catToPaint"
-            app:destination="@id/paintScreen" />
+            app:destination="@id/paintScreen"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
 </navigation>

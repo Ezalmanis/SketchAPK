@@ -40,6 +40,7 @@ public class PaintScreen extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+    private boolean navigate = false;
 
     private OnFragmentInteractionListener mListener;
 
@@ -104,37 +105,42 @@ public class PaintScreen extends Fragment {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeLeftInMillis = millisUntilFinished;
+                timeLeftInMillis=millisUntilFinished;
                 updateCountDownText();
+                if (timeLeftInMillis<=1501){
+                    onFinish();
+                    countDownTimer.cancel();
+                    diffBund.setText("00:00");
+                    navigate =true;
+                    goNext();
+                }
             }
 
             @Override
             public void onFinish() {
                 timerRunning = false;
-                updateButtons();
+
             }
         }.start();
         timerRunning = true;
     }
 
     private void updateCountDownText() {
+
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         diffBund.setText(timeLeftFormatted);
-    }
+        if (timeLeftInMillis < 1000) {
+            //buttonStartPause.setVisibility(View.INVISIBLE);
 
-    private void updateButtons() {
-        if (timerRunning) {
-        } else {
-            if (timeLeftInMillis < 1000) {
-                //buttonStartPause.setVisibility(View.INVISIBLE);
-                diffBund.setVisibility(View.INVISIBLE);
-                done.setVisibility(View.INVISIBLE);
-                NavHostFragment.findNavController(this).navigate(R.id.toEnd);
-            }
+            NavHostFragment.findNavController(this).navigate(R.id.toEnd);
         }
     }
+    private void goNext() {
+        NavHostFragment.findNavController(this).navigate(R.id.toEnd);
+    }
+
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

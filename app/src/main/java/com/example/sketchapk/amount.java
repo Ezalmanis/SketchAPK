@@ -95,33 +95,36 @@ public class amount extends Fragment {
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
-                b1.putInt("amountInt", 1);
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
+                    b1.putInt("amountInt", 1);
+                    b1.putString("amountStr", "1");
 
-                if (arg1.getAction()==MotionEvent.ACTION_UP)
-                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
-                return true;
+               if (arg1.getAction()==MotionEvent.ACTION_UP)
+                 Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+                 return true;
             }
         });
         button2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
                     b1.putInt("amountInt", 2);
+                    b1.putString("amountStr", "2");
 
-                if (arg1.getAction()==MotionEvent.ACTION_UP)
-                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+              if (arg1.getAction()==MotionEvent.ACTION_UP)
+                Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
                 return true;
             }
         });
         button3.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
                     b1.putInt("amountInt", 3);
+                    b1.putString("amountStr", "3");
 
-                if (arg1.getAction()==MotionEvent.ACTION_UP)
-                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+               if (arg1.getAction()==MotionEvent.ACTION_UP)
+                 Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
                 return true;
             }
         });

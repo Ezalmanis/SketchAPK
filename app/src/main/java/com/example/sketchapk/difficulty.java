@@ -80,14 +80,10 @@ public class difficulty extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-
-    private void goToNext() {
-        NavHostFragment.findNavController(this).navigate(R.id.diffToAmount,b);
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         Button button1 = getView().findViewById(R.id.buttonEasy);
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);

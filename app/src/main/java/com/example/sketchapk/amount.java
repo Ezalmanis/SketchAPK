@@ -79,6 +79,7 @@ public class amount extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+	// TODO: Clean this part please
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -134,7 +135,7 @@ public class amount extends Fragment {
                 EditText userInput = getView().findViewById(R.id.textInputEditText);
                 String amountStr = userInput.getText().toString();
                 b1.putString("amountStr", amountStr);
-                int amountInt = 1;
+                int amountInt = Integer.parseInt(amountStr);
                 b1.putInt("amountInt", amountInt);
             }
         });

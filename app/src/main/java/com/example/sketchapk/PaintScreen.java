@@ -9,13 +9,21 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Random;
+import java.util.Vector;
 
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -32,9 +40,11 @@ public class PaintScreen extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+
     private OnFragmentInteractionListener mListener;
 
-    public PaintScreen() { }
+    public PaintScreen() {
+    }
 
     public static PaintScreen newInstance(String param1, String param2) {
         PaintScreen fragment = new PaintScreen();
@@ -89,27 +99,6 @@ public class PaintScreen extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Bundle b2 = getArguments();
-        diffBund = getView().findViewById(R.id.text_view_countdown);
-        String time = b2.getString("time");
-        Long timer = Long.parseLong(time);
-        if (timer != null) {
-            String initial_Time = timer.toString();
-            diffBund.setText(initial_Time);
-            timeLeftInMillis = timer;
-            if (timerRunning == false) {
-                buttonStartPause.setVisibility(View.INVISIBLE);
-                startTimer();
-                updateCountDownText();
-            }
-
-        }
-        Button button1 = getView().findViewById(R.id.buttonDone);
-        button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
-    }
-
     private void startTimer() {
         endTime = System.currentTimeMillis() + timeLeftInMillis;
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
@@ -118,6 +107,7 @@ public class PaintScreen extends Fragment {
                 timeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
             }
+
             @Override
             public void onFinish() {
                 timerRunning = false;
@@ -133,6 +123,7 @@ public class PaintScreen extends Fragment {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         diffBund.setText(timeLeftFormatted);
     }
+
     private void updateButtons() {
         if (timerRunning) {
         } else {
@@ -143,5 +134,103 @@ public class PaintScreen extends Fragment {
                 NavHostFragment.findNavController(this).navigate(R.id.toEnd);
             }
         }
+    }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Bundle b2 = getArguments();
+        diffBund = getView().findViewById(R.id.text_view_countdown);
+        String time = b2.getString("time");
+        Long timer = Long.parseLong(time);
+        if (timer != null) {
+            String initial_Time = timer.toString();
+            diffBund.setText(initial_Time);
+            timeLeftInMillis = timer;
+            if (timerRunning == false) {
+                buttonStartPause.setVisibility(View.INVISIBLE);
+                startTimer();
+                updateCountDownText();
+            }
+        /*testing if the values from previous screens have been passed correctly
+        TextView paintScreenText = getView().findViewById(R.id.paintScreenText);
+       
+        String tag1 = b2.getString("tag1");
+        String tag2 = b2.getString("tag2");
+        String tag3 = b2.getString("tag3");
+        String amountStr = b.getString("amountStr");
+        int amountInt = b.getInt("amountInt");
+        paintScreenText.setText(amountStr + " " + tag1 + "," + tag2 + "," + tag3);*/
+
+
+            //generating a list of images
+
+            String tag1 = b2.getString("tag1");
+            String tag2 = b2.getString("tag2");
+            String tag3 = b2.getString("tag3");
+            String amountStr = b2.getString("amountStr");
+            int amountInt = b2.getInt("amountInt");
+            Vector<Dbimage> images = new Vector<Dbimage>(3, 1);  //array of image structure
+
+            try {
+                InputStream sketches = getContext().getAssets().open("sketches.txt");
+                BufferedReader is = new BufferedReader(new InputStreamReader(sketches, "UTF8"));
+                String line;
+                line = is.readLine();
+                boolean addimg = false;
+                while ((line = is.readLine()) != null) {
+                    addimg = false;
+                    Dbimage animage = new Dbimage(line);    //building an image object using the line of data from db file
+                    for (int i = 0; i < animage.tags.length; i++) {
+                        if ((animage.tags[i].equals(tag1)) || (animage.tags[i].equals(tag2)) || (animage.tags[i].equals(tag3))) {
+                            addimg = true;  //if image object contrains a requested tag, we will add it
+                            break;
+                        }
+                    }
+                    if (addimg) {
+                        images.add(animage);
+                    }
+                    addimg = false;
+                }
+
+            } catch (IOException e) {
+
+            }
+
+
+            //display %amount% random images
+            int num = 0;
+            ImageView picture = getView().findViewById(R.id.imageView);
+
+            for (int i = 0; i < amountInt; i++) {
+                Random r = new Random();
+                if (images.size() != 0) {
+                    num = r.nextInt(images.size());
+                    Log.d("FUCKYOU", Integer.toString(num));
+                    //display the image under the index "num"
+                    String imgname = images.elementAt(num).filename;
+                    Log.d("FUCKYOU", imgname);
+                    int res = getResources().getIdentifier(imgname, "drawable", getContext().getPackageName());
+                    Log.d("FUCKYOU", Integer.toString(res));
+                    Log.d("FUCKYOU", getContext().getPackageName());
+
+                    if (res != 0) {
+                        picture.setImageResource(res);
+                        images.remove(num);
+                        Log.d("FUCKYOU", "Picture changed to " + imgname);
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+                //wait until time runs out
+            }
+
+            //"done" button
+            Button button1 = getView().findViewById(R.id.buttonDone);
+            button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
+        }
+
+
     }
 }

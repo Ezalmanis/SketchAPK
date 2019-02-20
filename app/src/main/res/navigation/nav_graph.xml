@@ -12,10 +12,12 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/homeToAbout"
-            app:destination="@id/abootUs" />
+            app:destination="@id/abootUs"
+            app:popUpTo="@+id/homeFragment" />
         <action
             android:id="@+id/homeToDifficulty"
-            app:destination="@id/difficulty" />
+            app:destination="@id/difficulty"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/abootUs"
@@ -29,7 +31,8 @@
         tools:layout="@layout/fragment_difficulty" >
         <action
             android:id="@+id/diffToAmount"
-            app:destination="@id/amount" />
+            app:destination="@id/amount"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/amount"
@@ -38,7 +41,8 @@
         tools:layout="@layout/fragment_amount" >
         <action
             android:id="@+id/amountToCat"
-            app:destination="@id/category" />
+            app:destination="@id/category"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/paintScreen"
@@ -47,7 +51,8 @@
         tools:layout="@layout/fragment_paint_screen" >
         <action
             android:id="@+id/toEnd"
-            app:destination="@id/endScreen" />
+            app:destination="@id/endScreen"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/endScreen"
@@ -56,7 +61,8 @@
         tools:layout="@layout/fragment_end_screen" >
         <action
             android:id="@+id/playAgain"
-            app:destination="@id/difficulty" />
+            app:destination="@id/difficulty"
+            app:popUpTo="@+id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/category"

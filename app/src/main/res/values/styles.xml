@@ -7,5 +7,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+     <!-- Spinner style -->
+    <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
+        <item name="android:textSize"> 20sp </item>
+    </style>
+
     <color name="textView">#32CD32</color>
 </resources>

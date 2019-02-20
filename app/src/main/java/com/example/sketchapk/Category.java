@@ -125,12 +125,10 @@ public class Category extends Fragment {
         final Bundle b2 = b1;
         String amountStr = b1.getString("amountStr");
         TextView confirmationText = getView().findViewById(R.id.confirmationText);
-        confirmationText.setText(amountStr);
+        //confirmationText.setText(amountStr);
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.catToPaint, b2));
 
-
         //ACCESS THE SKETCHES.TXT FILE AND MAKE AN ARRAY OF CATEGORIES
-
         Vector<String> tagVec = new Vector<String>(10, 5); //array of available tags
 
         try {
@@ -179,11 +177,9 @@ public class Category extends Fragment {
             //tagArray.add("aaa");
         }
 
-
-
         // Dropdown menus:
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, tagArray);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_text, tagArray);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         Spinner spinner1 = getView().findViewById(R.id.spinner1);

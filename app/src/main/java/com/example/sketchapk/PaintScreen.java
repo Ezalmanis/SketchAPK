@@ -30,7 +30,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 public class PaintScreen extends Fragment {
     private TextView diffBund;
-    private Button buttonStartPause;
+   // private Button buttonStartPause;
     private Button done;
     private CountDownTimer countDownTimer;
     private boolean timerRunning;
@@ -67,7 +67,7 @@ public class PaintScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_paint_screen, container, false);
-        buttonStartPause = view.findViewById(R.id.button_start_pause);
+        //buttonStartPause = view.findViewById(R.id.button_start_pause);
         done = view.findViewById(R.id.buttonDone);
         return view;
     }
@@ -128,7 +128,7 @@ public class PaintScreen extends Fragment {
         if (timerRunning) {
         } else {
             if (timeLeftInMillis < 1000) {
-                buttonStartPause.setVisibility(View.INVISIBLE);
+                //buttonStartPause.setVisibility(View.INVISIBLE);
                 diffBund.setVisibility(View.INVISIBLE);
                 done.setVisibility(View.INVISIBLE);
                 NavHostFragment.findNavController(this).navigate(R.id.toEnd);
@@ -147,7 +147,7 @@ public class PaintScreen extends Fragment {
             diffBund.setText(initial_Time);
             timeLeftInMillis = timer;
             if (timerRunning == false) {
-                buttonStartPause.setVisibility(View.INVISIBLE);
+               // buttonStartPause.setVisibility(View.INVISIBLE);
                 startTimer();
                 updateCountDownText();
             }

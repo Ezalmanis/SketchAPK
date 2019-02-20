@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import androidx.navigation.Navigation;
@@ -124,8 +125,7 @@ public class Category extends Fragment {
         Bundle b1 = getArguments();
         final Bundle b2 = b1;
         String amountStr = b1.getString("amountStr");
-        TextView confirmationText = getView().findViewById(R.id.confirmationText);
-        //confirmationText.setText(amountStr);
+
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.catToPaint, b2));
 
         //ACCESS THE SKETCHES.TXT FILE AND MAKE AN ARRAY OF CATEGORIES
@@ -176,25 +176,41 @@ public class Category extends Fragment {
             tagArray.add(tagVec.elementAt(i));
             //tagArray.add("aaa");
         }
+        List<String> tagArray2 = new ArrayList<>();
+        for (int d = 0; d < tagVec.size(); d++) {
+            tagArray2.add(tagVec.elementAt(d));
+        }
+        tagArray.add(0,"default");
+        tagArray2.add(0,"nothing");
+
 
         // Dropdown menus:
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_text, tagArray);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_text, tagArray2);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
 
         Spinner spinner1 = getView().findViewById(R.id.spinner1);
         spinner1.setAdapter(adapter1);
 
         Spinner spinner2 = getView().findViewById(R.id.spinner2);
-        spinner2.setAdapter(adapter1);
+        spinner2.setAdapter(adapter2);
 
         Spinner spinner3 = getView().findViewById(R.id.spinner3);
-        spinner3.setAdapter(adapter1);
+        spinner3.setAdapter(adapter2);
+
 
          //bundle for passing the timer, amount of images and tags (added in this fragment)
         int amountInt = b2.getInt("amountInt");
         b2.putInt("amountInt", amountInt);  //put in the amount, which we got on the amount selection screen
         b2.putString("amountStr", amountStr);
+        final Random rand = new Random();
+        int cnt =adapter1.getCount();
+        final int n = rand.nextInt(cnt++);
+
 
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -202,7 +218,13 @@ public class Category extends Fragment {
             public void onItemSelected(AdapterView<?> adview, View view, int position, long id) {
                 // On selecting a spinner item
                 String spinValue = adview.getItemAtPosition(position).toString();
-                b2.putString("tag1", spinValue);
+                if (!(spinValue.equals("default"))){
+                    b2.putString("tag1", spinValue);
+                }else{
+
+                    spinValue = adview.getItemAtPosition(n).toString();
+                    b2.putString("tag1", spinValue);
+                }
             }
 
             @Override
@@ -217,7 +239,9 @@ public class Category extends Fragment {
             public void onItemSelected(AdapterView<?> adview, View view, int position, long id) {
                 // On selecting a spinner item
                 String spinValue = adview.getItemAtPosition(position).toString();
-                b2.putString("tag2", spinValue);
+                if (!(spinValue.equals("nothing"))){
+                    b2.putString("tag2", spinValue);
+                }
             }
 
             @Override
@@ -232,7 +256,10 @@ public class Category extends Fragment {
             public void onItemSelected(AdapterView<?> adview, View view, int position, long id) {
                 // On selecting a spinner item
                 String spinValue = adview.getItemAtPosition(position).toString();
-                b2.putString("tag3", spinValue);
+                if (!(spinValue.equals("nothing"))){
+                    b2.putString("tag3", spinValue);
+                }
+
             }
 
             @Override

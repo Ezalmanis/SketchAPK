@@ -3,5 +3,5 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="600"
-        android:font="@font/Montserrat" />
+        android:font="@font/montserrat" />
 </font-family>

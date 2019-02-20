@@ -102,22 +102,17 @@ public class PaintScreen extends Fragment {
 
     private void startTimer() {
         endTime = System.currentTimeMillis() + timeLeftInMillis;
-               countDownTimer = new CountDownTimer(timeLeftInMillis, 500) {
+               countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis=millisUntilFinished;
                 updateCountDownText();
-                if (endTime<=1000){
-                    onFinish();
-                    countDownTimer.cancel();
-                    diffBund.setText("00:00");
-                    navigate =true;
-                    goNext();
+
 
 
 
                 }
-            }
+
 
             @Override
             public void onFinish() {
@@ -140,6 +135,7 @@ public class PaintScreen extends Fragment {
             NavHostFragment.findNavController(this).navigate(R.id.toEnd);
         }
     }
+
     private void goNext() {
         NavHostFragment.findNavController(this).navigate(R.id.toEnd);
     }

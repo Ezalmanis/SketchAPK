@@ -1,5 +1,9 @@
 package com.example.sketchapk;
 
+/**
+ * Stores a single record from database as two values:
+ * filename and an array of tags associated with the file
+ */
 public class Dbimage {
     public String filename;
     public String tags[];

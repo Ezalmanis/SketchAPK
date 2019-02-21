@@ -1,10 +1,8 @@
 package com.example.sketchapk;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.io.BufferedReader;
@@ -63,6 +60,13 @@ public class Category extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Generates a list of all available tags and populates the spinners with them
+     * After the user has selected the tags, it gets passed to the paint screen
+     * If no tags have been selected, a completely random selection of images
+     * will be shown on the next screen
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

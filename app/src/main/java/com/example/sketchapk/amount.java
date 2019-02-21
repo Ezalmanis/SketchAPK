@@ -132,6 +132,33 @@ public class amount extends Fragment {
                 b1.putInt("amountInt", amountInt);
             }
         });
-        amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b1));
+
+        if (b1.getInt("amountInt") == 0) {
+            b1.putInt("amountInt", 1);
+            b1.putString("amountStr", "1");
+        }
+
+       // amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b1));
+
+
+        amountConfirmButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
+                    if (b1.getString("amountString") == null) {
+                        b1.putInt("amountInt", 1);
+                        b1.putString("amountStr", "1");
+                    }
+
+                if (arg1.getAction()==MotionEvent.ACTION_UP)
+                    Navigation.findNavController(arg0).navigate(R.id.amountToCat,b1);
+                return true;
+            }
+        });
+
+
+
+
+
     }
 }

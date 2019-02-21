@@ -1,47 +1,33 @@
 package com.example.sketchapk;
 
-import android.content.Context;
-import android.graphics.drawable.AdaptiveIconDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Handler;
-import java.util.Locale;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.Vector;
-
-
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 
 
 public class PaintScreen extends Fragment {
     private TextView diffBund;
-    // private Button buttonStartPause;
     private Button done;
     private CountDownTimer countDownTimer;
     private boolean timerRunning = false;
     private long timeLeftInMillis;
     private boolean navigate = false;
-    int delay =1000; // in milliseconds
     private int amountDisplayed = 0;
     private Vector<Dbimage> images = new Vector<Dbimage>(3, 1);  //array of image structure
     private ImageView picture;
@@ -59,8 +45,9 @@ public class PaintScreen extends Fragment {
     public PaintScreen() {
     }
 
-    public static PaintScreen newInstance() {
+    public static PaintScreen newInstance(String param1, String param2) {
         PaintScreen fragment = new PaintScreen();
+        Bundle args = new Bundle();
         return fragment;
     }
 
@@ -86,6 +73,9 @@ public class PaintScreen extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Creates and starts a new CountDownTimer with timeLeftInMilis time limit
+     */
     private void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
@@ -101,17 +91,10 @@ public class PaintScreen extends Fragment {
         }.start();
         timerRunning = true;
     }
-    TimerTask a = new TimerTask() {
-        @Override
-        public void run() {
-            diffBund.setText("00:00");
-        }
-    };
-    private void setToZero() {
 
-        diffBund.setText("00:00");
-
-    }
+    /**
+     * Calls "DONE" button's onClick method
+     */
     public void performClick() {
         handler.postDelayed(new Runnable() {
                 @Override
@@ -119,8 +102,12 @@ public class PaintScreen extends Fragment {
                     button1.performClick();
                 }
             }, 1000);
-
     }
+
+    /**
+     * Updates the text view which displays the amount of time left
+     * and calls the performClick method if the time has run out
+     */
     private void updateCountDownText() {
 
         int minutes = (int) (((timeLeftInMillis)) / 1000) / 60;
@@ -140,6 +127,10 @@ public class PaintScreen extends Fragment {
 
     }
 
+    /**
+     * Stops the current running timer, clears the vector of Dbimage objects
+     * Navigates to the end screen
+     */
     private void goNext() {
         if (timerRunning) {
             countDownTimer.cancel();
@@ -148,7 +139,12 @@ public class PaintScreen extends Fragment {
         NavHostFragment.findNavController(this).navigate(R.id.toEnd);
     }
 
-
+    /**
+     * Generates a vector of Dbimage objects with requested tags
+     * Displays the requested amount of images on the screen,
+     * switching them on timer
+     * @param savedInstanceState
+     */
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle b2 = getArguments();
@@ -163,6 +159,9 @@ public class PaintScreen extends Fragment {
         String tag2 = b2.getString("tag2");
         String tag3 = b2.getString("tag3");
         final int amountInt = b2.getInt("amountInt");
+
+        button1 = getView().findViewById(R.id.buttonDone);
+        button1.setVisibility(View.GONE);
 
         try {
             InputStream sketches = getContext().getAssets().open("sketches.txt");
@@ -187,9 +186,10 @@ public class PaintScreen extends Fragment {
 
         } catch (IOException e) {}
 
+        //displaying images
 
         amountDisplayed = 0;
-        button1 = getView().findViewById(R.id.buttonDone);
+        button1.setVisibility(View.VISIBLE);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

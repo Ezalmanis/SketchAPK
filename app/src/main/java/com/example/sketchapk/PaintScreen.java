@@ -107,6 +107,7 @@ public class PaintScreen extends Fragment {
     /**
      * Updates the text view which displays the amount of time left
      * and calls the performClick method if the time has run out
+     * Reason for specific implementation is applications incompatibility with devices that run api 25 or lower.
      */
     private void updateCountDownText() {
 
@@ -153,7 +154,9 @@ public class PaintScreen extends Fragment {
         String time = b2.getString("time");
         timer = Long.parseLong(time);
 
-        //generating a list of images
+        /**
+         * generating a list of images
+         */
 
         String tag1 = b2.getString("tag1");
         String tag2 = b2.getString("tag2");
@@ -171,10 +174,16 @@ public class PaintScreen extends Fragment {
             boolean addimg = false;
             while ((line = is.readLine()) != null) {
                 addimg = false;
-                Dbimage animage = new Dbimage(line);    //building an image object using the line of data from db file
+                Dbimage animage = new Dbimage(line);
+                /**
+                 * building an image object using the line of data from db file
+                 */
                 for (int i = 0; i < animage.tags.length; i++) {
+                    /**
+                     * if image object contrains a requested tag, we will add it
+                     */
                     if ((animage.tags[i].equals(tag1)) || (animage.tags[i].equals(tag2)) || (animage.tags[i].equals(tag3))) {
-                        addimg = true;  //if image object contrains a requested tag, we will add it
+                        addimg = true;
                         break;
                     }
                 }
@@ -186,7 +195,10 @@ public class PaintScreen extends Fragment {
 
         } catch (IOException e) {}
 
-        //displaying images
+        /**
+         * If the method is called, it switches the picture to the next one and resets timer
+         * if the last picture of selected tag and/or selected amount of pictures has been already shown, the call goes to goNext()
+         */
 
         amountDisplayed = 0;
         button1.setVisibility(View.VISIBLE);

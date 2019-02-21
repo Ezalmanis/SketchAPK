@@ -10,6 +10,10 @@ import android.widget.Button;
 import androidx.navigation.Navigation;
 
 public class homeFragment extends Fragment {
+    /**
+     * @param savedInstanceState
+     * savedInstanceState is set to null to ensure that when the application loops after End Screen, there are no garbage values
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
@@ -24,6 +28,12 @@ public class homeFragment extends Fragment {
         Button button1 = getView().findViewById(R.id.button1);
         Button button2 = getView().findViewById(R.id.button2);
         Button button3 = getView().findViewById(R.id.button3);
+        /**
+         * button 1 sends the user to AbootUs
+         * button 2 prompts the player to start the sketching process
+         * button 3 exits the application.
+         */
+
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToAbout, null));
         button2.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.homeToDifficulty));
         button3.setOnClickListener(new View.OnClickListener() {

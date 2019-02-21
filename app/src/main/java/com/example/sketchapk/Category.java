@@ -30,12 +30,14 @@ public class Category extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public Category() {
-        // Required empty public constructor
+        /**
+         * Required empty public constructor
+         */
+
     }
 
     public static Category newInstance() {
         Category fragment = new Category();
-        Bundle args = new Bundle();
         return fragment;
     }
 
@@ -46,7 +48,6 @@ public class Category extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
@@ -110,6 +111,12 @@ public class Category extends Fragment {
         }
         catch (IOException e) {}
 
+        /**
+         * Creates two different Arrays meant for tags,
+         * First one starts with Default, second with Nothing
+         */
+
+
         List<String> tagArray = new ArrayList<>();
         for (int i = 0; i < tagVec.size(); i++) {
             tagArray.add(tagVec.elementAt(i));
@@ -123,7 +130,10 @@ public class Category extends Fragment {
         tagArray2.add(0,"nothing");
 
 
-        // Dropdown menus:
+        /**
+         * Makes dropdown menus from the available tags. First dropdown uses first tag Array, second and third, uses second tag Array
+         */
+
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item_text, tagArray);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -142,21 +152,28 @@ public class Category extends Fragment {
         spinner3.setAdapter(adapter2);
 
 
-        //bundle for passing the timer, amount of images and tags (added in this fragment)
+        /**
+         *  bundle for passing the timer, amount of images and tags (added in this fragment)
+         */
+
         int amountInt = b2.getInt("amountInt");
-        b2.putInt("amountInt", amountInt);  //put in the amount, which we got on the amount selection screen
+        b2.putInt("amountInt", amountInt);
         b2.putString("amountStr", amountStr);
         final Random rand = new Random();
         int cnt =adapter1.getCount();
         cnt = cnt++;
         final int n = rand.nextInt(cnt);
 
-
+        /**
+         * enables functionality of the dropdown menus,
+         * if nothing is selected on the first listener, it calls a random tag
+         * if nothing is selected on the second or third listener, nothing is selected.
+         */
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adview, View view, int position, long id) {
-                // On selecting a spinner item
+
                 String spinValue = adview.getItemAtPosition(position).toString();
                 if (!(spinValue.equals("default"))){
                     b2.putString("tag1", spinValue);
@@ -174,7 +191,6 @@ public class Category extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> adview, View view, int position, long id) {
-                // On selecting a spinner item
                 String spinValue = adview.getItemAtPosition(position).toString();
                 if (!(spinValue.equals("nothing"))){
                     b2.putString("tag2", spinValue);
@@ -189,7 +205,6 @@ public class Category extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> adview, View view, int position, long id) {
-                // On selecting a spinner item
                 String spinValue = adview.getItemAtPosition(position).toString();
                 if (!(spinValue.equals("nothing"))){
                     b2.putString("tag3", spinValue);

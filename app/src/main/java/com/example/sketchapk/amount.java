@@ -26,17 +26,21 @@ public class amount extends Fragment {
         amount fragment = new amount();
         return fragment;
     }
-	/**
-	* Loads savedInstanceState, which is a bundle that contains values that the application uses
-	* ensures that minimizing the application wouldn't impede its functionality/make it crash
-	*/
+
+    /**
+     *Loads savedInstanceState, a bundle that contains values that the application uses,
+     *this ensures that minimizing the application wouldn't impede its functionality/make it crash
+     *onCreate gets called after NavHost has moved to this fragment
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    
 
+    /**
+     *Creates and returns the view hierarchy associated with the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_amount, container, false);
@@ -49,13 +53,16 @@ public class amount extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * tells the fragment that its activity has completed its own Activity.onCreate().
+     */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final Bundle b1 = getArguments();
         b1.putInt("amountInt", 0);
 	
-	/**
+	    /**
          *  Assigns buttons to specific elements on the screen
          */
         Button button1 = getView().findViewById(R.id.buttonOne);
@@ -126,7 +133,7 @@ public class amount extends Fragment {
 	/**
          * OnTouchListener, that is assigned to confirm value button
          * It takes the bundle value that was passed from TextInputEditText and checks whether the passed values are null and 0, if so, it assigns 1 as the defalt value for the bundle, if they are not null and 0, it does not alter the value
-         *  passed a value, then the
+         * passed a value, then the
          */
 
         amountConfirmButton.setOnTouchListener(new View.OnTouchListener() {

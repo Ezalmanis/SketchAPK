@@ -31,7 +31,10 @@ public class difficulty extends Fragment {
         difficulty fragment = new difficulty();
         return fragment;
     }
-
+    /**
+     * Loads savedInstanceState, a bundle that contains values that the application uses,
+     * this ensures that minimizing the application wouldn't impede its functionality/make it crash
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,14 @@ public class difficulty extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
         Button custom = getView().findViewById(R.id.buttonCustom);
+        /**
+         * buttonX.setOnTouchListener checks whether the corresponding button has been pressed or released.
+         * If the button is pressed, its' corresponding value is added to bundle
+         * Upon release of said button, the bundle is passed to the next fragment, and NavHost is propmted to move to it.
+         * correspondingly, button 1 sets timer to 1 minute, button 2 sets it to 30 seconds, button 3 sets it to 15 seconds, and "custom" button sets it 2 minutes.
+         * Initially, we wanted to make custom timer value, but later we did not implement this, it could be added if demand for it is sufficient
+         */
+
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {

@@ -23,7 +23,9 @@ public class endScreen extends Fragment {
         endScreen fragment = new endScreen();
         return fragment;
     }
-
+    /**
+     * Sets savedInstanceState bundle to null, we have made this method so that no garbage data would remain, and proper cleanup would happen
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(null);
@@ -33,7 +35,6 @@ public class endScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_end_screen, container, false);
     }
 

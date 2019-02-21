@@ -28,13 +28,15 @@ public class AbootUs extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_aboot_us, container, false);
     }
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    /**
+     * method is needed for proper navigation to be possible between fragments
+     */
 }

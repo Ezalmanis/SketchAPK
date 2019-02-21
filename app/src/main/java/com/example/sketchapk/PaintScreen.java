@@ -263,9 +263,13 @@ public class PaintScreen extends Fragment {
                             timerRunning = false;
                         }
                         if (timer != null) {
-                            String initial_Time = timer.toString();
-                            diffBund.setText(initial_Time);
                             timeLeftInMillis = timer;
+                            int minutes = (int) (((timeLeftInMillis)) / 1000) / 60;
+                            int seconds = (int) (((timeLeftInMillis)) / 1000) % 60;
+                            String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
+
+                            diffBund.setText(timeLeftFormatted);
+
                             startTimer();
                             //updateCountDownText();
                         }

@@ -26,7 +26,7 @@ public class amount extends Fragment {
 
     public amount() { }
 
-    public static amount newInstance(String param1, String param2) {
+    public static amount newInstance() {
         amount fragment = new amount();
         return fragment;
     }
@@ -42,31 +42,8 @@ public class amount extends Fragment {
         return inflater.inflate(R.layout.fragment_amount, container, false);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 	// TODO: Clean this part please
@@ -75,9 +52,7 @@ public class amount extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Bundle b = getArguments();
         final Bundle b1 = b;
-        String strDiff = b.getString("StringDiff");
-        //TextView diffBund = getView().findViewById(R.id.diffBund);
-        //diffBund.setText(strDiff);
+        b1.putInt("amountInt",0);
         Button button1 = getView().findViewById(R.id.buttonOne);
         Button button2 = getView().findViewById(R.id.buttonTwo);
         Button button3 = getView().findViewById(R.id.buttonThree);
@@ -118,7 +93,6 @@ public class amount extends Fragment {
                 return true;
             }
         });
-
         Button amountConfirmButton = getView().findViewById(R.id.amountConfirmButton);
         TextInputEditText e = getView().findViewById(R.id.textInputEditText);
         e.addTextChangedListener(new TextWatcher() {
@@ -133,19 +107,11 @@ public class amount extends Fragment {
             }
         });
 
-        if (b1.getInt("amountInt") == 0) {
-            b1.putInt("amountInt", 1);
-            b1.putString("amountStr", "1");
-        }
-
-       // amountConfirmButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.amountToCat, b1));
-
-
         amountConfirmButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction()==MotionEvent.ACTION_DOWN)
-                    if (b1.getString("amountString") == null) {
+                    if ((b1.getString("amountString") == null)&&(b1.getInt("amountInt")==0)) {
                         b1.putInt("amountInt", 1);
                         b1.putString("amountStr", "1");
                     }
@@ -155,10 +121,5 @@ public class amount extends Fragment {
                 return true;
             }
         });
-
-
-
-
-
     }
 }

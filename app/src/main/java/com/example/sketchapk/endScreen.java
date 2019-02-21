@@ -19,7 +19,7 @@ public class endScreen extends Fragment {
     public endScreen() { }
 
 
-    public static endScreen newInstance(String param1, String param2) {
+    public static endScreen newInstance() {
         endScreen fragment = new endScreen();
         return fragment;
     }
@@ -37,31 +37,8 @@ public class endScreen extends Fragment {
         return inflater.inflate(R.layout.fragment_end_screen, container, false);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -78,21 +55,5 @@ public class endScreen extends Fragment {
             }
         });
         button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.playAgain, null));
-       /*button1.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            boolean finishing = true;
-            boolean fin = false ;
-            endScreen.super.getActivity().recreate();
-
-
-
-        }
-        });*/
-
-
-
     }
-
-
 }

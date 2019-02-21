@@ -22,31 +22,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class difficulty extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
     private OnFragmentInteractionListener mListener;
     Bundle b = new Bundle();
 
     public difficulty() { }
 
-    public static difficulty newInstance(String param1, String param2) {
+    public static difficulty newInstance() {
         difficulty fragment = new difficulty();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -60,23 +48,6 @@ public class difficulty extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
@@ -88,14 +59,12 @@ public class difficulty extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
         Button custom = getView().findViewById(R.id.buttonCustom);
-        boolean lol = false;
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
                 if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
                     b.putInt("Timer", 60000);
-                //b.putString("StringDiff", "big gay android");
-                b.putString("time", "60000");
+                    b.putString("time", "60000");
                 if (arg1.getAction()==MotionEvent.ACTION_UP)
                     Navigation.findNavController(arg0).navigate(R.id.diffToAmount,b);
                 return true;

@@ -174,7 +174,7 @@ public class Category extends Fragment {
         List<String> tagArray = new ArrayList<>();
         for (int i = 0; i < tagVec.size(); i++) {
             tagArray.add(tagVec.elementAt(i));
-            //tagArray.add("aaa");
+
         }
         List<String> tagArray2 = new ArrayList<>();
         for (int d = 0; d < tagVec.size(); d++) {
@@ -209,7 +209,8 @@ public class Category extends Fragment {
         b2.putString("amountStr", amountStr);
         final Random rand = new Random();
         int cnt =adapter1.getCount();
-        final int n = rand.nextInt(cnt++);
+        cnt = cnt++;
+        final int n = rand.nextInt(cnt);
 
 
         spinner1.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -221,12 +222,10 @@ public class Category extends Fragment {
                 if (!(spinValue.equals("default"))){
                     b2.putString("tag1", spinValue);
                 }else{
-
                     spinValue = adview.getItemAtPosition(n).toString();
                     b2.putString("tag1", spinValue);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adview) {
                 //what am I supposed to do?
@@ -243,7 +242,6 @@ public class Category extends Fragment {
                     b2.putString("tag2", spinValue);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adview) {
                 //what am I supposed to do?

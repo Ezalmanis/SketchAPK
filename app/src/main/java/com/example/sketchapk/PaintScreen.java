@@ -178,7 +178,9 @@ public class PaintScreen extends Fragment {
     }
 
     private void goNext() {
-        countDownTimer.cancel();
+        if (timerRunning) {
+            countDownTimer.cancel();
+        }
         images.clear();
         NavHostFragment.findNavController(this).navigate(R.id.toEnd);
     }

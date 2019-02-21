@@ -1,21 +1,17 @@
 package com.example.sketchapk;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.support.design.widget.TextInputEditText;
-import android.widget.TextView;
 
 import androidx.navigation.Navigation;
 
@@ -30,40 +26,46 @@ public class amount extends Fragment {
         amount fragment = new amount();
         return fragment;
     }
+	/**
+	* Loads savedInstanceState, which is a bundle that contains values that the application uses
+	* ensures that minimizing the application wouldn't impede its functionality/make it crash
+	*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    /**
-     * Loads savedInstanceState, which is a bundle that contains values that the application uses
-     * ensures that minimizing the application wouldn't impede its functionality/make it crash
-     */
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_amount, container, false);
     }
 
-
+	/**
+     * method is needed for proper navigation to be possible between fragments
+     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-    /**
-     * method is needed for proper navigation to be possible between fragments
-     */
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Bundle b = getArguments();
-        final Bundle b1 = b;
-        b1.putInt("amountInt",0);
+        final Bundle b1 = getArguments();
+        b1.putInt("amountInt", 0);
+	
+	/**
+         *  Assigns buttons to specific elements on the screen
+         */
         Button button1 = getView().findViewById(R.id.buttonOne);
         Button button2 = getView().findViewById(R.id.buttonTwo);
         Button button3 = getView().findViewById(R.id.buttonThree);
+
         /**
-         *  Assigns buttons to specific elements on the screen
+         * buttonX.setOnTouchListener checks whether the corresponding button has been pressed or released.
+         * If the button is pressed, its' corresponding value is added to bundle
+         * Upon release of said button, the bundle is passed to the next fragment, and NavHost is propmted to move to it.
          */
 
         button1.setOnTouchListener(new View.OnTouchListener() {
@@ -102,10 +104,10 @@ public class amount extends Fragment {
                 return true;
             }
         });
-        /**
-         * buttonX.setOnTouchListener checks whether the corresponding button has been pressed or released.
-         * If the button is pressed, its' corresponding value is added to bundle
-         * Upon release of said button, the bundle is passed to the next fragment, and NavHost is propmted to move to it.
+        
+	/**
+         * TexInputEditText is bound to a design interface on a users screen
+         * said method monitors input, and if a value has been input, it gets passed to a bundle, that would later be sent to the next Fragment
          */
         Button amountConfirmButton = getView().findViewById(R.id.amountConfirmButton);
         TextInputEditText e = getView().findViewById(R.id.textInputEditText);
@@ -120,9 +122,11 @@ public class amount extends Fragment {
                 b1.putInt("amountInt", amountInt);
             }
         });
-        /**
-         * TexInputEditText is bound to a design interface on a users screen
-         * said method monitors input, and if a value has been input, it gets passed to a bundle, that would later be sent to the next Fragment
+        
+	/**
+         * OnTouchListener, that is assigned to confirm value button
+         * It takes the bundle value that was passed from TextInputEditText and checks whether the passed values are null and 0, if so, it assigns 1 as the defalt value for the bundle, if they are not null and 0, it does not alter the value
+         *  passed a value, then the
          */
 
         amountConfirmButton.setOnTouchListener(new View.OnTouchListener() {
@@ -139,10 +143,5 @@ public class amount extends Fragment {
                 return true;
             }
         });
-        /**
-         * OnTouchListener, that is assigned to confirm value button
-         * It takes the bundle value that was passed from TextInputEditText and checks whether the passed values are null and 0, if so, it assigns 1 as the defalt value for the bundle, if they are not null and 0, it does not alter the value
-         *  passed a value, then the
-         */
     }
 }

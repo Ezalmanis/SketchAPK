@@ -32,11 +32,10 @@ public class AbootUs extends Fragment {
         return inflater.inflate(R.layout.fragment_aboot_us, container, false);
     }
 
-
+/**
+     * method is needed for proper navigation to be possible between fragments
+     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-    /**
-     * method is needed for proper navigation to be possible between fragments
-     */
 }

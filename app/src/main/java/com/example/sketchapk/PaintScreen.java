@@ -40,11 +40,6 @@ public class PaintScreen extends Fragment {
     private CountDownTimer countDownTimer;
     private boolean timerRunning = false;
     private long timeLeftInMillis;
-    private long endTime;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
     private boolean navigate = false;
     int delay =1000; // in milliseconds
     private int amountDisplayed = 0;
@@ -57,39 +52,26 @@ public class PaintScreen extends Fragment {
 
     public Handler getHandler() {
         return handler;
-
     }
-
-
-
 
     private OnFragmentInteractionListener mListener;
 
     public PaintScreen() {
     }
 
-    public static PaintScreen newInstance(String param1, String param2) {
+    public static PaintScreen newInstance() {
         PaintScreen fragment = new PaintScreen();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_paint_screen, container, false);
-        //buttonStartPause = view.findViewById(R.id.button_start_pause);
         done = view.findViewById(R.id.buttonDone);
         return view;
     }
@@ -100,30 +82,11 @@ public class PaintScreen extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
 
     private void startTimer() {
-
-        endTime = 1000 + timeLeftInMillis;
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -193,23 +156,12 @@ public class PaintScreen extends Fragment {
         diffBund = getView().findViewById(R.id.text_view_countdown);
         String time = b2.getString("time");
         timer = Long.parseLong(time);
-        /*testing if the values from previous screens have been passed correctly
-        TextView paintScreenText = getView().findViewById(R.id.paintScreenText);
-
-        String tag1 = b2.getString("tag1");
-        String tag2 = b2.getString("tag2");
-        String tag3 = b2.getString("tag3");
-        String amountStr = b.getString("amountStr");
-        int amountInt = b.getInt("amountInt");
-        paintScreenText.setText(amountStr + " " + tag1 + "," + tag2 + "," + tag3);*/
-
 
         //generating a list of images
 
         String tag1 = b2.getString("tag1");
         String tag2 = b2.getString("tag2");
         String tag3 = b2.getString("tag3");
-        String amountStr = b2.getString("amountStr");
         final int amountInt = b2.getInt("amountInt");
 
         try {
@@ -233,9 +185,7 @@ public class PaintScreen extends Fragment {
                 addimg = false;
             }
 
-        } catch (IOException e) {
-
-        }
+        } catch (IOException e) {}
 
 
         amountDisplayed = 0;
@@ -245,86 +195,43 @@ public class PaintScreen extends Fragment {
             public void onClick(View v) {
 
                 if (amountDisplayed < amountInt) {
-                    Log.d("VALUES", amountDisplayed+" / "+amountInt);
                     Random r = new Random();
                     if (images.size() > 0) {
                         int num = r.nextInt(images.size());
                         String imgname = images.elementAt(num).filename;
                         int res = getResources().getIdentifier(imgname, "drawable", getContext().getPackageName());
-                        Log.d("VALUES", "1st checkpoint");
+
                         if (res != 0) {
                             picture.setImageResource(res);
                             images.remove(num);
                             amountDisplayed++;
                         }
-                        Log.d("VALUES", "2st checkpoint");
+
                         if (timerRunning) {
                             countDownTimer.cancel();
                             timerRunning = false;
                         }
+
                         if (timer != null) {
                             timeLeftInMillis = timer;
                             int minutes = (int) (((timeLeftInMillis)) / 1000) / 60;
                             int seconds = (int) (((timeLeftInMillis)) / 1000) % 60;
                             String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
-
                             diffBund.setText(timeLeftFormatted);
-
                             startTimer();
-                            //updateCountDownText();
                         }
                     }
                     else {
                         goNext();
                     }
-                    Log.d("VALUES", "3st checkpoint");
                 }
                 else {
-                    Log.d("VALUES", "4th checkpoint");
                     goNext();
                 }
             }
         });
 
-        Log.d("VALUES", "5st checkpoint");
         button1.performClick();
 
-
-
-
-
-        //display %amount% random images
-  /*          int num = 0;
-            ImageView picture = getView().findViewById(R.id.imageView);
-
-            for (int i = 0; i < amountInt; i++) {
-                Random r = new Random();
-                if (images.size() != 0) {
-                    num = r.nextInt(images.size());
-                    Log.d("FUCKYOU", Integer.toString(num));
-                    //display the image under the index "num"
-                    String imgname = images.elementAt(num).filename;
-                    Log.d("FUCKYOU", imgname);
-                    int res = getResources().getIdentifier(imgname, "drawable", getContext().getPackageName());
-                    Log.d("FUCKYOU", Integer.toString(res));
-                    Log.d("FUCKYOU", getContext().getPackageName());
-
-                    if (res != 0) {
-                        picture.setImageResource(res);
-                        images.remove(num);
-                        Log.d("FUCKYOU", "Picture changed to " + imgname);
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-                //wait until time runs out
-            }
-
-            //"done" button
-            Button button1 = getView().findViewById(R.id.buttonDone);
-            button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
-        }*/
     }
 }

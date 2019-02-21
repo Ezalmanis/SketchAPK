@@ -1,7 +1,6 @@
 package com.example.sketchapk;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,24 +16,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.os.Handler;
 import java.util.Locale;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
+
 
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+
+
 public class PaintScreen extends Fragment {
     private TextView diffBund;
-   // private Button buttonStartPause;
+    // private Button buttonStartPause;
     private Button done;
     private CountDownTimer countDownTimer;
-    private boolean timerRunning;
+    private boolean timerRunning = false;
     private long timeLeftInMillis;
     private long endTime;
     private static final String ARG_PARAM1 = "param1";
@@ -42,6 +46,22 @@ public class PaintScreen extends Fragment {
     private String mParam1;
     private String mParam2;
     private boolean navigate = false;
+    int delay =1000; // in milliseconds
+    private int amountDisplayed = 0;
+    private Vector<Dbimage> images = new Vector<Dbimage>(3, 1);  //array of image structure
+    private ImageView picture;
+    int amountInt = 0;
+    Long timer;
+    private Button button1;
+    final Handler handler = new Handler();
+
+    public Handler getHandler() {
+        return handler;
+
+    }
+
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -102,38 +122,64 @@ public class PaintScreen extends Fragment {
     }
 
     private void startTimer() {
-        endTime = System.currentTimeMillis() + timeLeftInMillis;
-               countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+
+        endTime = 1000 + timeLeftInMillis;
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis=millisUntilFinished;
                 updateCountDownText();
-                }
-
+            }
 
             @Override
             public void onFinish() {
                 timerRunning = false;
-
             }
         }.start();
         timerRunning = true;
     }
+    TimerTask a = new TimerTask() {
+        @Override
+        public void run() {
+            diffBund.setText("00:00");
+        }
+    };
+    private void setToZero() {
 
+        diffBund.setText("00:00");
+
+    }
+    public void performClick() {
+        handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    button1.performClick();
+                }
+            }, 1000);
+
+    }
     private void updateCountDownText() {
 
-        int minutes = (int) (timeLeftInMillis / 1000) / 60;
-        int seconds = (int) (timeLeftInMillis / 1000) % 60;
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        int minutes = (int) (((timeLeftInMillis)) / 1000) / 60;
+        int seconds = (int) (((timeLeftInMillis)) / 1000) % 60;
+        String timeLeftFormatted = String.format("%02d:%02d", minutes, seconds);
         diffBund.setText(timeLeftFormatted);
-        if (timeLeftInMillis < 1000) {
-            //buttonStartPause.setVisibility(View.INVISIBLE);
 
-            NavHostFragment.findNavController(this).navigate(R.id.toEnd);
+        if (timeLeftFormatted.toString().equals("00:01")) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    diffBund.setText("00:00");
+                    performClick();
+                }
+            }, 1000);
         }
+
     }
 
     private void goNext() {
+        countDownTimer.cancel();
+        images.clear();
         NavHostFragment.findNavController(this).navigate(R.id.toEnd);
     }
 
@@ -141,21 +187,13 @@ public class PaintScreen extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle b2 = getArguments();
+        picture = getView().findViewById(R.id.imageView);
         diffBund = getView().findViewById(R.id.text_view_countdown);
         String time = b2.getString("time");
-        Long timer = Long.parseLong(time);
-        if (timer != null) {
-            String initial_Time = timer.toString();
-            diffBund.setText(initial_Time);
-            timeLeftInMillis = timer;
-            if (timerRunning == false) {
-               // buttonStartPause.setVisibility(View.INVISIBLE);
-                startTimer();
-                updateCountDownText();
-            }
+        timer = Long.parseLong(time);
         /*testing if the values from previous screens have been passed correctly
         TextView paintScreenText = getView().findViewById(R.id.paintScreenText);
-       
+
         String tag1 = b2.getString("tag1");
         String tag2 = b2.getString("tag2");
         String tag3 = b2.getString("tag3");
@@ -164,43 +202,93 @@ public class PaintScreen extends Fragment {
         paintScreenText.setText(amountStr + " " + tag1 + "," + tag2 + "," + tag3);*/
 
 
-            //generating a list of images
+        //generating a list of images
 
-            String tag1 = b2.getString("tag1");
-            String tag2 = b2.getString("tag2");
-            String tag3 = b2.getString("tag3");
-            String amountStr = b2.getString("amountStr");
-            int amountInt = b2.getInt("amountInt");
-            Vector<Dbimage> images = new Vector<Dbimage>(3, 1);  //array of image structure
+        String tag1 = b2.getString("tag1");
+        String tag2 = b2.getString("tag2");
+        String tag3 = b2.getString("tag3");
+        String amountStr = b2.getString("amountStr");
+        final int amountInt = b2.getInt("amountInt");
 
-            try {
-                InputStream sketches = getContext().getAssets().open("sketches.txt");
-                BufferedReader is = new BufferedReader(new InputStreamReader(sketches, "UTF8"));
-                String line;
-                line = is.readLine();
-                boolean addimg = false;
-                while ((line = is.readLine()) != null) {
-                    addimg = false;
-                    Dbimage animage = new Dbimage(line);    //building an image object using the line of data from db file
-                    for (int i = 0; i < animage.tags.length; i++) {
-                        if ((animage.tags[i].equals(tag1)) || (animage.tags[i].equals(tag2)) || (animage.tags[i].equals(tag3))) {
-                            addimg = true;  //if image object contrains a requested tag, we will add it
-                            break;
-                        }
+        try {
+            InputStream sketches = getContext().getAssets().open("sketches.txt");
+            BufferedReader is = new BufferedReader(new InputStreamReader(sketches, "UTF8"));
+            String line;
+            line = is.readLine();
+            boolean addimg = false;
+            while ((line = is.readLine()) != null) {
+                addimg = false;
+                Dbimage animage = new Dbimage(line);    //building an image object using the line of data from db file
+                for (int i = 0; i < animage.tags.length; i++) {
+                    if ((animage.tags[i].equals(tag1)) || (animage.tags[i].equals(tag2)) || (animage.tags[i].equals(tag3))) {
+                        addimg = true;  //if image object contrains a requested tag, we will add it
+                        break;
                     }
-                    if (addimg) {
-                        images.add(animage);
-                    }
-                    addimg = false;
                 }
-
-            } catch (IOException e) {
-
+                if (addimg) {
+                    images.add(animage);
+                }
+                addimg = false;
             }
 
+        } catch (IOException e) {
 
-            //display %amount% random images
-            int num = 0;
+        }
+
+
+        amountDisplayed = 0;
+        button1 = getView().findViewById(R.id.buttonDone);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (amountDisplayed < amountInt) {
+                    Log.d("VALUES", amountDisplayed+" / "+amountInt);
+                    Random r = new Random();
+                    if (images.size() > 0) {
+                        int num = r.nextInt(images.size());
+                        String imgname = images.elementAt(num).filename;
+                        int res = getResources().getIdentifier(imgname, "drawable", getContext().getPackageName());
+                        Log.d("VALUES", "1st checkpoint");
+                        if (res != 0) {
+                            picture.setImageResource(res);
+                            images.remove(num);
+                            amountDisplayed++;
+                        }
+                        Log.d("VALUES", "2st checkpoint");
+                        if (timerRunning) {
+                            countDownTimer.cancel();
+                            timerRunning = false;
+                        }
+                        if (timer != null) {
+                            String initial_Time = timer.toString();
+                            diffBund.setText(initial_Time);
+                            timeLeftInMillis = timer;
+                            startTimer();
+                            //updateCountDownText();
+                        }
+                    }
+                    else {
+                        goNext();
+                    }
+                    Log.d("VALUES", "3st checkpoint");
+                }
+                else {
+                    Log.d("VALUES", "4th checkpoint");
+                    goNext();
+                }
+            }
+        });
+
+        Log.d("VALUES", "5st checkpoint");
+        button1.performClick();
+
+
+
+
+
+        //display %amount% random images
+  /*          int num = 0;
             ImageView picture = getView().findViewById(R.id.imageView);
 
             for (int i = 0; i < amountInt; i++) {
@@ -231,14 +319,6 @@ public class PaintScreen extends Fragment {
             //"done" button
             Button button1 = getView().findViewById(R.id.buttonDone);
             button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.toEnd, null));
-        }
-
+        }*/
     }
-    @Override public void onResume() {
-        super.onResume();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-    }
-    @Override public void onPause() {
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        super.onPause(); }
 }

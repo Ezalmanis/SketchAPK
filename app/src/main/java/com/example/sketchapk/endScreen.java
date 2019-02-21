@@ -1,6 +1,7 @@
 package com.example.sketchapk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,30 +13,21 @@ import android.widget.Button;
 import androidx.navigation.Navigation;
 
 public class endScreen extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
+
     private OnFragmentInteractionListener mListener;
 
     public endScreen() { }
 
+
     public static endScreen newInstance(String param1, String param2) {
         endScreen fragment = new endScreen();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        super.onCreate(null);
+        System.gc();
     }
 
     @Override
@@ -73,8 +65,10 @@ public class endScreen extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
+
         Button button1 = getView().findViewById(R.id.buttonAgain);
         Button button2 = getView().findViewById(R.id.buttonQuit);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +77,22 @@ public class endScreen extends Fragment {
                 System.exit(0);
             }
         });
-        button1.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.playAgain, null));
+        button1.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.playAgain, null));
+       /*button1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean finishing = true;
+            boolean fin = false ;
+            endScreen.super.getActivity().recreate();
+
+
+
+        }
+        });*/
+
+
+
     }
+
+
 }

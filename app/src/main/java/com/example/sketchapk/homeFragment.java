@@ -10,11 +10,16 @@ import android.widget.Button;
 import androidx.navigation.Navigation;
 
 public class homeFragment extends Fragment {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(null);
+    }
 
     public homeFragment() { }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
         Button button1 = getView().findViewById(R.id.button1);
         Button button2 = getView().findViewById(R.id.button2);
@@ -33,5 +38,6 @@ public class homeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
 }
 

@@ -81,7 +81,7 @@ public class difficulty extends Fragment {
         button1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
-                if (arg1.getAction()==MotionEvent.ACTION_BUTTON_PRESS)
+                if (arg1.getAction()==MotionEvent.ACTION_DOWN)
                     b.putInt("Timer", 60000);
                     b.putString("time", "60000");
                 if (arg1.getAction()==MotionEvent.ACTION_UP)

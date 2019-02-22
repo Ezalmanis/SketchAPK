@@ -19,7 +19,10 @@ import java.util.Random;
 import java.util.Vector;
 import androidx.navigation.fragment.NavHostFragment;
 
-
+/**
+ * Fragment is the place where difficulty settings, amount of pictures and the pictures themselves get loaded.
+ * The user is prompted to draw the pictures that appear on the screen within their selected time limit. If they have finished drawing, they can press done to cycle to the next picture.
+ */
 
 public class PaintScreen extends Fragment {
     private TextView diffBund;
@@ -63,11 +66,10 @@ public class PaintScreen extends Fragment {
         return view;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
+    /**
+     * interface is needed for proper navigation to be possible between fragments, it enables NavHost for it.
+     */
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);

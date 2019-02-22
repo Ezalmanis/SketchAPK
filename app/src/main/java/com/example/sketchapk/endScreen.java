@@ -12,6 +12,9 @@ import android.widget.Button;
 
 import androidx.navigation.Navigation;
 
+/**
+ * Fragment was created to clean up any garbage data that might have remained and to prompt the user to play again.
+ */
 public class endScreen extends Fragment {
 
     private OnFragmentInteractionListener mListener;
@@ -38,7 +41,9 @@ public class endScreen extends Fragment {
         return inflater.inflate(R.layout.fragment_end_screen, container, false);
     }
 
-
+    /**
+     * interface is needed for proper navigation to be possible between fragments, it enables NavHost for it
+     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

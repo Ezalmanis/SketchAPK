@@ -23,7 +23,9 @@ import java.util.Vector;
 
 import androidx.navigation.Navigation;
 
-
+/**
+ * Fragment is meant so that the end user can select the type of pictures they want to draw.
+ */
 
 public class Category extends Fragment {
 
@@ -56,7 +58,9 @@ public class Category extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+    /**
+     * interface is needed for proper navigation to be possible between fragments, it enables NavHost for it.
+     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

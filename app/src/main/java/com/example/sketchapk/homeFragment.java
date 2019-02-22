@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.navigation.Navigation;
 
+/**
+ * Fragment is meant to be the start fragment. The location where the application starts, and from which the user can either quit, read about our team or start the sketch practice.
+ */
+
 public class homeFragment extends Fragment {
     /**
      * @param savedInstanceState

@@ -15,6 +15,9 @@ import android.support.design.widget.TextInputEditText;
 
 import androidx.navigation.Navigation;
 
+/**
+ * Fragment is meant so that the end user can select amount of pictures they want to draw.
+ */
 public class amount extends Fragment {
 
 
@@ -47,7 +50,7 @@ public class amount extends Fragment {
     }
 
 	/**
-     * method is needed for proper navigation to be possible between fragments
+     * interface is needed for proper navigation to be possible between fragments, it enables NavHost for it.
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);

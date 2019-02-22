@@ -21,6 +21,10 @@ import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+/**
+ * Fragment is meant so that the end user can the difficulty, meaning the time which is alloted for them to draw a picture.
+ */
+
 public class difficulty extends Fragment {
     private OnFragmentInteractionListener mListener;
     Bundle b = new Bundle();
@@ -50,6 +54,10 @@ public class difficulty extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+    /**
+     * interface is needed for proper navigation to be possible between fragments, it enables NavHost for it.
+     */
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);

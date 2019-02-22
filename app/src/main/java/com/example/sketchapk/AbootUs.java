@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * AbootUs is the fragment that contains information about our team
+ * AbootUs is a fragment that contains information describing the team that created this project.
  */
 public class AbootUs extends Fragment {
 
@@ -44,7 +44,7 @@ public class AbootUs extends Fragment {
     }
 
     /**
-     * method is needed for proper navigation to be possible between fragments
+     * interface is needed for proper navigation to be possible between fragments, it enables NavHost for it.
      */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);

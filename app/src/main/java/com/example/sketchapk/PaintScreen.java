@@ -57,13 +57,7 @@ public class PaintScreen extends Fragment {
         return fragment;
     }
 
-    @Override public void onResume() {
-        super.onResume();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-    }
-    @Override public void onPause() {
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        super.onPause(); }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

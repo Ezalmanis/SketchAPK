@@ -66,10 +66,10 @@ public class Category extends Fragment {
     }
 
     /**
-     * Generates a list of all available tags and populates the spinners with them
-     * After the user has selected the tags, it gets passed to the paint screen
+     * Generates a list of all available tags and populates the spinners with them.
+     * After the user has selected the tags, it gets passed to the paint screen.
      * If no tags have been selected, a completely random selection of images
-     * will be shown on the next screen
+     * will be shown on the next screen.
      * @param savedInstanceState
      */
     @Override

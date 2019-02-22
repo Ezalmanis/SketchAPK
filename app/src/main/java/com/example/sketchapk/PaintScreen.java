@@ -76,7 +76,7 @@ public class PaintScreen extends Fragment {
     }
 
     /**
-     * Creates and starts a new CountDownTimer with timeLeftInMilis time limit
+     * Creates and starts a new CountDownTimer with timeLeftInMilis time limit.
      */
     private void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
@@ -108,7 +108,7 @@ public class PaintScreen extends Fragment {
 
     /**
      * Updates the text view which displays the amount of time left
-     * and calls the performClick method if the time has run out
+     * and calls the performClick method if the time has run out.
      * Reason for specific implementation is applications incompatibility with devices that run api 25 or lower.
      */
     private void updateCountDownText() {
@@ -143,9 +143,9 @@ public class PaintScreen extends Fragment {
     }
 
     /**
-     * Generates a vector of Dbimage objects with requested tags
+     * Generates a vector of Dbimage objects with requested tags.
      * Displays the requested amount of images on the screen,
-     * switching them on timer
+     * switching them on timer.
      * @param savedInstanceState
      */
     public void onActivityCreated(Bundle savedInstanceState) {

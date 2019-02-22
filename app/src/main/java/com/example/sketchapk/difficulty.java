@@ -22,7 +22,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 /**
- * Fragment is meant so that the end user can the difficulty, meaning the time which is alloted for them to draw a picture.
+ * Fragment is meant so that the end user select their prefered difficulty, which sets an appropriate time limit for drawing a picture.
  */
 
 public class difficulty extends Fragment {
@@ -37,7 +37,7 @@ public class difficulty extends Fragment {
     }
     /**
      * Loads savedInstanceState, a bundle that contains values that the application uses,
-     * this ensures that minimizing the application wouldn't impede its functionality/make it crash
+     * this ensures that minimizing the application wouldn't impede its functionality/make it crash.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {

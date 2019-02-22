@@ -7,7 +7,7 @@ import android.net.Uri;
 
 
 /**
- * MainActivity is our NavHost Activity. MainActivity loads Navhost, and implements every fragments Interaction Listener. Without this implementation, the NavHost fragment could not interact with the fragments
+ * MainActivity is our NavHost Activity, MainActivity loads Navhost, and implements every fragments Interaction Listener. Without this implementation, the NavHost fragment could not interact with the fragments
  * NavHost is the process that enables navigation within our application.
  */
 public class MainActivity extends AppCompatActivity implements endScreen.OnFragmentInteractionListener,

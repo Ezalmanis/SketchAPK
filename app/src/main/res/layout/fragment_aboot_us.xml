@@ -18,6 +18,7 @@
         android:layout_marginBottom="2dp"
         android:background="@color/colorTransparent"
         android:fontFamily="@font/font2"
+        android:gravity="center_horizontal"
         android:paddingLeft="18sp"
         android:text="@string/about_us_text"
         android:textColor="@color/textColor"

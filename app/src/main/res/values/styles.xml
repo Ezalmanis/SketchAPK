@@ -11,6 +11,8 @@
     <style name="SpinnerTextViewItem" parent="@android:style/Widget.TextView" >
         <item name="android:textSize"> 20sp </item>
     </style>
-
-    <color name="textView">#32CD32</color>
+    <!-- Button style -->
+    <style name="DefaultButton">
+        <item name="android:background">@drawable/button_selector</item>
+    </style>
 </resources>

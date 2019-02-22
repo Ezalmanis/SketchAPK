@@ -1,8 +1,4 @@
 package com.example.sketchapk;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,15 +7,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-
-import java.util.Locale;
-
-import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 /**
  * Fragment is meant so that the end user select their prefered difficulty, which sets an appropriate time limit for drawing a picture.
@@ -66,7 +55,7 @@ public class difficulty extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button button1 = getView().findViewById(R.id.buttonEasy);
+        final Button button1 = getView().findViewById(R.id.buttonEasy);
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
         Button custom = getView().findViewById(R.id.buttonCustom);

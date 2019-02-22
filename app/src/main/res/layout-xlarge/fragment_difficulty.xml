@@ -23,7 +23,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <Button style="@style/DefaultButton"
+        android:clickable="true"
         android:id="@+id/buttonCustom"
         android:layout_width="280dp"
         android:layout_height="80dp"
@@ -33,7 +34,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/button_bg"
         android:fontFamily="@font/font1"
         android:text="Beginner"
         android:textSize="50sp"
@@ -42,7 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <Button
+    <Button style="@style/DefaultButton"
+        android:clickable="true"
         android:id="@+id/buttonEasy"
         android:layout_width="280dp"
         android:layout_height="80dp"
@@ -52,7 +53,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/button_bg"
         android:fontFamily="@font/font1"
         android:text="Easy"
         android:textSize="50sp"
@@ -61,7 +61,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCustom" />
 
-    <Button
+    <Button style="@style/DefaultButton"
+        android:clickable="true"
         android:id="@+id/buttonNormal"
         android:layout_width="280dp"
         android:layout_height="80dp"
@@ -71,7 +72,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/button_bg"
         android:fontFamily="@font/font1"
         android:text="Normal"
         android:textSize="50sp"
@@ -80,7 +80,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonEasy" />
 
-    <Button
+    <Button style="@style/DefaultButton"
+        android:clickable="true"
         android:id="@+id/buttonHard"
         android:layout_width="280dp"
         android:layout_height="80dp"
@@ -90,7 +91,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="90dp"
-        android:background="@drawable/button_bg"
         android:fontFamily="@font/font1"
         android:text="Hard"
         android:textSize="50sp"

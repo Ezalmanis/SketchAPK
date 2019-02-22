@@ -1,5 +1,6 @@
 package com.example.sketchapk;
 
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -11,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.Vector;
+
 import androidx.navigation.fragment.NavHostFragment;
 
 /**
@@ -53,6 +56,14 @@ public class PaintScreen extends Fragment {
         Bundle args = new Bundle();
         return fragment;
     }
+
+    @Override public void onResume() {
+        super.onResume();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
+    @Override public void onPause() {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        super.onPause(); }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -59,6 +59,7 @@ public class difficulty extends Fragment {
         Button button2 = getView().findViewById(R.id.buttonNormal);
         Button button3 = getView().findViewById(R.id.buttonHard);
         Button custom = getView().findViewById(R.id.buttonCustom);
+
         /**
          * buttonX.setOnTouchListener checks whether the corresponding button has been pressed or released.
          * If the button is pressed, its' corresponding value is added to bundle
